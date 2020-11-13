@@ -7,3 +7,6 @@
 - npm run dev
 - cp .env.example .env
 - php artisan key:generate
+
+## Gentella Form Elements
+https://colorlib.com/polygon/gentelella/index.html
