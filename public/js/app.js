@@ -49886,8 +49886,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/felix/Documents/4. job/wiz-erp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/felix/Documents/4. job/wiz-erp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\wiz-erp-felix\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\wiz-erp-felix\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
