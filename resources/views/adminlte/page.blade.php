@@ -20,43 +20,19 @@
     {{-- Laravel fonts --}}
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    {{-- Laravel Link --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />
-
-    {{-- <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"> --}}
-    {{-- <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet"> --}}
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />    
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nprogress.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jqvmap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/icheck-flat-green.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-progressbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor-bs-drp-daterangepicker.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/gentelella-custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet"> 
 
-    {{-- <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}"> --}}
-
-    {{--
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
-    {{--
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"> --}}
-    {{--
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet"> --}}
-    {{--
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" /> --}}
-    {{--
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet"> --}}
-    {{--
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    --}}
-    {{--
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-    --}}
-    {{--
-    <link href="../build/css/custom.min.css" rel="stylesheet"> --}}
 
 
 </head>
@@ -72,21 +48,10 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <div class="profile clearfix">
-                        <div class="profile_pic">
-                            {{-- <img src="images/img.jpg" alt="..." class="img-circle profile_img"> --}}
-                        </div>
-                        <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>John Doe</h2>
-                        </div>
-                    </div>
-
                     <br />
 
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -219,7 +184,7 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">John Doe
+                                    John Doe
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
@@ -1045,60 +1010,6 @@
     <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/bootstrap-daterangepicker.js') }}"></script>
     <script src="{{ asset('js/gentelella-custom.js') }}"></script>
-
-
-
-
-
-    {{-- <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    --}}
-    {{-- <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    --}}
-    {{-- <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    --}}
-    {{-- <script src="../vendors/nprogress/nprogress.js"></script>
-    --}}
-    {{-- <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-    --}}
-    {{-- <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-    --}}
-    {{-- <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script> --}}
-    {{-- <script src="../vendors/iCheck/icheck.min.js"></script>
-    --}}
-    {{-- <script src="../vendors/skycons/skycons.js"></script>
-    --}}
-    {{-- <script src="../vendors/Flot/jquery.flot.js"></script>
-    --}}
-    {{-- <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-    --}}
-    {{-- <script src="../vendors/Flot/jquery.flot.time.js"></script>
-    --}}
-    {{-- <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-    --}}
-    {{-- <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-    --}}
-    {{-- <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    --}}
-    {{-- <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    --}}
-    {{-- <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-    --}}
-    {{-- <script src="../vendors/DateJS/build/date.js"></script>
-    --}}
-    {{-- <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    --}}
-    {{-- <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    --}}
-    {{-- <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    --}}
-    {{-- <script src="../vendors/moment/min/moment.min.js"></script>
-    --}}
-    {{-- <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    --}}
-    {{-- <script src="../build/js/custom.min.js"></script>
-    --}}
-
 
 </body>
 

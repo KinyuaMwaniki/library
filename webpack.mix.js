@@ -37,7 +37,7 @@ const gentelella_vendor = gentelella_home + '/vendors/';
  */
 mix.
     // gentelella
-    copy(gentelella_home + 'build/css/custom.css',
+    copy(gentelella_home + 'build/css/custom.min.css',
         public_css + 'gentelella-custom.css').
     copy(gentelella_home + 'build/js/custom.js',
         public_js + 'gentelella-custom.js').
