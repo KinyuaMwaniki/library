@@ -14,6 +14,5 @@ https://colorlib.com/polygon/gentelella/index.html
 ## Todo's
 - remove register route and create seeder for admin 
 - install nwidart modules
-- install infyom
 - install yajra datatables
 - install spatie permissions
