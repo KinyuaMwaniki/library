@@ -5,6 +5,7 @@ namespace Modules\Role\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -14,8 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        
-        return view('role::roles.index');
+        $permissions = Permission::all();
+        return view('role::roles.index', compact('permissions'));
     }
 
     /**
