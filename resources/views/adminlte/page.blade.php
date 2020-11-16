@@ -33,6 +33,9 @@
     <link href="{{ asset('css/vendor-bs-drp-daterangepicker.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet"> 
 
+    <link href="{{ asset('css/wizag.css') }}" rel="stylesheet">
+
+
 
 
 </head>
@@ -44,7 +47,7 @@
 
             @include('adminlte.partials.topnav')
 
-            <div class="right_col" role="main">
+            <div id="app" class="right_col" role="main">
 
               <p>
               </p>
