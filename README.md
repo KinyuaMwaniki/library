@@ -8,11 +8,15 @@
 - cp .env.example .env
 - php artisan key:generate
 
+## Default User
+U:admin@wizag.biz
+P:password
+
 ## Gentella Form Elements
 https://colorlib.com/polygon/gentelella/index.html
 
+## Laravel Module Commands
+https://nwidart.com/laravel-modules/v6/advanced-tools/artisan-commands
+
 ## Todo's
-- remove register route and create seeder for admin 
-- install nwidart modules
 - install yajra datatables
-- install spatie permissions
