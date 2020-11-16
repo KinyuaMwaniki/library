@@ -4,39 +4,25 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {{-- Laravel Meta's --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    {{-- Laravel Scripts --}}
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    {{-- Laravel fonts --}}
-    <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />    
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nprogress.css') }}" rel="stylesheet">
     <link href="{{ asset('css/jqvmap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/icheck-flat-green.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-progressbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor-bs-drp-daterangepicker.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet"> 
-
+    <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/wizag.css') }}" rel="stylesheet">
-
-
-
 
 </head>
 
@@ -48,12 +34,8 @@
             @include('adminlte.partials.topnav')
 
             <div id="app" class="right_col" role="main">
-
-              <p>
-              </p>
-              @yield('content')
+                @yield('content')
             </div>
-
 
             <footer>
                 <div class="pull-right">
@@ -61,7 +43,6 @@
                 </div>
                 <div class="clearfix"></div>
             </footer>
-
         </div>
     </div>
 
