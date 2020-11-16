@@ -4,6 +4,7 @@
 
 return [
     'permissions' => [
+        
         'Inventory Menu' => [
             'Inventory List' => [
                 'create_inventory',
@@ -24,6 +25,7 @@ return [
                 'delete_internal_grn',
             ],
         ],
+
         'Access Control Menu' => [
             'Roles' => [
                 'create_roles',
@@ -38,6 +40,7 @@ return [
                 'delete_permissions',
             ],
         ],
+        
         'Test Menu' => [
             'Test Sub Menu' => [
                 'create_submenu',

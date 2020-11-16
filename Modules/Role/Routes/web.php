@@ -13,4 +13,6 @@
 
 Route::prefix('role')->group(function() {
     Route::get('/', 'RoleController@index')->name('role.index');
+    Route::get('create', 'RoleController@create')->name('role.create');
+    Route::post('store', 'RoleController@store')->name('role.store');
 });

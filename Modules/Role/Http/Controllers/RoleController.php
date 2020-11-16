@@ -5,6 +5,8 @@ namespace Modules\Role\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
@@ -15,8 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::all();
-        return view('role::roles.index', compact('permissions'));
+        return view('role::roles.index');
     }
 
     /**
@@ -25,7 +26,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('role::create');
+        // info("create()");
+        return view('role::roles.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:roles',
+            'guard_name' => 'required'
+        ]);
+
+        $role = Role::create([
+            'name' => $request->name,
+            'guard_name' => $request->guard_name
+        ]);
+
+        Session::flash('message', "Role Saved");
+        return redirect(route('role.index'));
+        info($role);
     }
 
     /**
