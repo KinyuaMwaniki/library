@@ -9,3 +9,7 @@
 .btn-primary {
     color: #fff;
 }
+
+.alert-clearfix {
+    overflow: auto;
+}

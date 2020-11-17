@@ -33,10 +33,17 @@
 
             @include('adminlte.partials.topnav')
 
+            
             <div id="app" class="right_col" role="main">
+                @if (Session::has('message'))
+                    <p class="alert alert-info alert-clearfix">{{ Session::get('message') }}</p>
+                @endif
+                @if(Session::has('error'))
+                    <p class="alert alert-danger alert-clearfix">{{ Session::get('error') }}</p>
+                @endif
                 @yield('content')
             </div>
-
+            
             <footer>
                 <div class="pull-right">
                     Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
