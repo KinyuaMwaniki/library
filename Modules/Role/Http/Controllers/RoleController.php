@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Permission;
+use Modules\Role\Http\Requests\StoreRoleRequest;
 
 class RoleController extends Controller
 {
@@ -17,7 +18,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('role::roles.index');
+        $roles = Role::all();
+        return view('role::roles.index', compact('roles'));
     }
 
     /**
@@ -35,13 +37,8 @@ class RoleController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(StoreRoleRequest $request)
     {
-        $request->validate([
-            'name' => 'required|unique:roles',
-            'guard_name' => 'required'
-        ]);
-
         $role = Role::create([
             'name' => $request->name,
             'guard_name' => $request->guard_name
@@ -49,7 +46,6 @@ class RoleController extends Controller
 
         Session::flash('message', "Role Saved");
         return redirect(route('role.index'));
-        info($role);
     }
 
     /**

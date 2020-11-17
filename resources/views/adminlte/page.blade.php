@@ -10,19 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/nprogress.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jqvmap.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/icheck-flat-green.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-progressbar.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/vendor-bs-drp-daterangepicker.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/wizag.css') }}" rel="stylesheet">
+    @include('adminlte.partials.css')
 
 </head>
 
@@ -53,30 +43,9 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/fastclick.js') }}"></script>
-    <script src="{{ asset('js/nprogress.js') }}"></script>
-    <script src="{{ asset('js/chart.js') }}"></script>
-    <script src="{{ asset('js/gauge.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-progressbar.js') }}"></script>
-    <script src="{{ asset('js/icheck.js') }}"></script>
-    <script src="{{ asset('js/skycons.js') }}"></script>
-    <script src="{{ asset('js/jquery.flot.js') }}"></script>
-    <script src="{{ asset('js/jquery.flot.pie.js') }}"></script>
-    <script src="{{ asset('js/jquery.flot.time.js') }}"></script>
-    <script src="{{ asset('js/jquery.flot.stack.js') }}"></script>
-    <script src="{{ asset('js/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('js/jquery.flot.orderBars.js') }}"></script>
-    <script src="{{ asset('js/jquery.flot.spline.js') }}"></script>
-    <script src="{{ asset('js/flot.curvedLines.js') }}"></script>
-    <script src="{{ asset('js/date.js') }}"></script>
-    <script src="{{ asset('js/jqvmap.js') }}"></script>
-    <script src="{{ asset('js/jqvmap.world.js') }}"></script>
-    <script src="{{ asset('js/jqvmap.sampledata.js') }}"></script>
-    <script src="{{ asset('js/moment.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-daterangepicker.js') }}"></script>
-    <script src="{{ asset('js/gentelella-custom.js') }}"></script>
+    @include('adminlte.partials.scripts')
+
+    @yield('scripts')
 
 </body>
 
