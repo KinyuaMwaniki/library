@@ -1,4 +1,6 @@
 {
     "Test": true,
-    "Role": true
+    "Role": true,
+    "Inventory": true,
+    "Tax": true
 }
