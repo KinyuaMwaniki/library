@@ -28,7 +28,6 @@ class RoleController extends Controller
      */
     public function create()
     {
-        // info("create()");
         return view('role::roles.create');
     }
 
@@ -65,7 +64,14 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        return view('role::edit');
+        $role = Role::find($id);
+        
+        if (empty($role)) {
+            Session::flash('message', "Role Not Found");
+            return redirect(route('tickets.index'));
+        }
+
+        return view('role::roles.edit', compact('role'));
     }
 
     /**
@@ -76,7 +82,20 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $role = Role::find($id);
+        
+        if (empty($role)) {
+            Session::flash('message', "Role Not Found");
+            return redirect(route('tickets.index'));
+        }
+
+        $role->update([
+            'name' => $request->name,
+            'guard_name' => $request->guard_name
+        ]);
+
+        Session::flash('message', "Role Updated");
+        return redirect(route('role.index'));
     }
 
     /**
@@ -86,6 +105,15 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::find($id);
+        
+        if (empty($role)) {
+            Session::flash('message', "Role Not Found");
+            return redirect(route('tickets.index'));
+        }
+
+        $role->delete();
+        Session::flash('message', "Role Deleted");
+        return redirect(route('role.index'));
     }
 }
