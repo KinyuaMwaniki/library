@@ -14015,7 +14015,118 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      errors: [],
+      success_message: null,
+      roles: "",
+      permissions: "",
+      form: {
+        role: ""
+      }
+    };
+  },
+  created: function created() {
+    this.getRoles();
+    this.getAllPermissions();
+  },
+  methods: {
+    getAllPermissions: function getAllPermissions() {
+      var _this = this;
+
+      axios.get("/api/v1/get-all-permissions").then(function (response) {
+        _this.permissions = response.data.all_permissions;
+      })["catch"](function (err) {
+        return _this.errors.push("Unable to load permissions. Please refresh the page");
+      });
+    },
+    getPermissions: function getPermissions() {
+      var _this2 = this;
+
+      axios.get("/api/v1/get-permissions", {
+        params: {
+          role_id: this.form.role
+        }
+      }).then(function (response) {// this.roles = response.data.roles;
+      })["catch"](function (err) {
+        return _this2.errors.push("Unable to load permissions. Please refresh the page");
+      });
+    },
+    getRoles: function getRoles() {
+      var _this3 = this;
+
+      axios.get("/api/v1/get-roles").then(function (response) {
+        _this3.roles = response.data.roles;
+      })["catch"](function (err) {
+        return _this3.errors.push("Unable to load roles. Please refresh the page");
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -14502,21 +14613,179 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "card bg-light mb-3" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "card-text" }, [
+          _c("div", { staticClass: "col-sm-12" }, [
+            _vm.errors.length
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-warning",
+                    attrs: { role: "alert" }
+                  },
+                  [
+                    _c(
+                      "ul",
+                      _vm._l(_vm.errors, function(error, index) {
+                        return _c("li", { key: index }, [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(error) +
+                              "\n              "
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ]
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-12" }, [
+            _vm.success_message
+              ? _c(
+                  "div",
+                  { staticClass: "alert alert-info", attrs: { role: "alert" } },
+                  [_c("b", [_vm._v(_vm._s(_vm.success_message))])]
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _c("form", [
+            _c("div", { staticClass: "col-sm-12" }, [
+              _c("div", { staticClass: "col-sm-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.role,
+                          expression: "form.role"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "call_type", id: "call_type" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "role",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          },
+                          _vm.getPermissions
+                        ]
+                      }
+                    },
+                    [
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            selected: "true",
+                            disabled: "disabled",
+                            value: ""
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Select Role\n                  "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._l(_vm.roles, function(single) {
+                        return _c(
+                          "option",
+                          { key: single.id, domProps: { value: single.id } },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(single.name) +
+                                "\n                  "
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-12" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.permissions, function(submenu, index) {
+                return _c("li", { key: index }, [
+                  _vm._v(
+                    "\n              " + _vm._s(index) + "\n              "
+                  ),
+                  _c(
+                    "ul",
+                    _vm._l(submenu, function(permission, sub) {
+                      return _c("li", { key: sub }, [
+                        _vm._v(
+                          "\n                  " +
+                            _vm._s(sub) +
+                            "\n                  "
+                        ),
+                        _c(
+                          "ul",
+                          _vm._l(permission, function(perm, i) {
+                            return _c("li", { key: i }, [
+                              _vm._v(
+                                "\n                      " +
+                                  _vm._s(perm) +
+                                  "\n                    "
+                              )
+                            ])
+                          }),
+                          0
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("h3", [_vm._v("\n        Assign Questions\n    ")]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          "\n        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo necessitatibus tempora blanditiis odio amet vero recusandae autem fugiat nisi fuga non, earum, tempore maxime laudantium corrupti aliquam expedita, pariatur quasi?\n    "
-        )
-      ])
+    return _c("label", { attrs: { for: "call_type" } }, [
+      _vm._v("\n                  Role\n                  "),
+      _c("span", { staticClass: "required-marker" }, [_vm._v("* ")])
     ])
   }
 ]

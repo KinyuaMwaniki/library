@@ -1,6 +1,5 @@
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link rel="icon" href="images/favicon.ico" type="image/ico" />
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/nprogress.css') }}" rel="stylesheet">
 <link href="{{ asset('css/jqvmap.css') }}" rel="stylesheet">
