@@ -10,3 +10,10 @@
 <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/wizag.css') }}" rel="stylesheet">
 <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/colReorder.dataTables.min.css') }}" rel="stylesheet">
+
+
+
+
+

@@ -13,7 +13,9 @@
             <li>
                 <a href="{!! route('role.index') !!}">Roles</a>
             </li>
-            <li><a href="#">Dashboard2</a></li>
+            <li>
+                <a href="#">Permissions</a>
+            </li>
             <li><a href="#">Dashboard3</a></li>
         </ul>
     </li>
