@@ -14,7 +14,7 @@
                 <a href="{!! route('role.index') !!}">Roles</a>
             </li>
             <li>
-                <a href="#">Permissions</a>
+                <a href="{!! route('permissions.index') !!}">Permissions</a>
             </li>
             <li><a href="#">Dashboard3</a></li>
         </ul>

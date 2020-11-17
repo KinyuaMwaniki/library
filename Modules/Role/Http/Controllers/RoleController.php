@@ -68,7 +68,7 @@ class RoleController extends Controller
         
         if (empty($role)) {
             Session::flash('message', "Role Not Found");
-            return redirect(route('tickets.index'));
+            return redirect(route('role.index'));
         }
 
         return view('role::roles.edit', compact('role'));
@@ -86,7 +86,7 @@ class RoleController extends Controller
         
         if (empty($role)) {
             Session::flash('message', "Role Not Found");
-            return redirect(route('tickets.index'));
+            return redirect(route('role.index'));
         }
 
         $role->update([
@@ -109,7 +109,7 @@ class RoleController extends Controller
         
         if (empty($role)) {
             Session::flash('message', "Role Not Found");
-            return redirect(route('tickets.index'));
+            return redirect(route('role.index'));
         }
 
         $role->delete();

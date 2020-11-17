@@ -1,0 +1,1 @@
+Vue.component('assign-permissions', require('./AssignPermissions.vue').default);

@@ -12,6 +12,8 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {     
+        // TODO: ADD DB transaction in case permissions have error
+
         DB::table('permissions')->delete();   
 
         $permissions = Config::get('permission_constants.permissions');
