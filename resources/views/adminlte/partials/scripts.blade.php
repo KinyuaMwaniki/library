@@ -1,7 +1,7 @@
 <!-- Latest compiled and minified JavaScript -->
 
 <script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.js') }}"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/fastclick.js') }}"></script>
 <script src="{{ asset('js/nprogress.js') }}"></script>
 <script src="{{ asset('js/chart.js') }}"></script>

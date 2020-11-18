@@ -11,6 +11,7 @@
             {!! Form::open(['route' => 'role.store']) !!}
             @include('role::roles.fields')
             {!! Form::close() !!}
+
         </div>
     </div>
 @endsection

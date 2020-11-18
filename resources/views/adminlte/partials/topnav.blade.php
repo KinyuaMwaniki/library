@@ -10,7 +10,7 @@
                         id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
-                    <div class="dropdown-menu dropdown-usermenu pull-right user_menu_top"
+                    <div class="dropdown-menu dropdown-usermenu pull-right"
                         aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
