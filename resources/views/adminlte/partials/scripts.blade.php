@@ -1,3 +1,5 @@
+<!-- Latest compiled and minified JavaScript -->
+
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
 <script src="{{ asset('js/fastclick.js') }}"></script>
@@ -30,5 +32,8 @@
 <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('js/buttons.colVis.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.colReorder.min.js') }}"></script>
+<script src="{{ asset('js/switchery.min.js') }}"></script>
 
-<script src="https://colorlib.com/polygon/vendors/switchery/dist/switchery.min.js"></script>
+
+
+
