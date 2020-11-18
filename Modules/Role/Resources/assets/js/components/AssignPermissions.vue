@@ -49,29 +49,24 @@
             <ul class="list-unstyled">
               <li v-for="(submenu, index) in permissions" :key="index">
                 <div class="col-sm-6">
-                    <h3>{{ index }}</h3>
+                  <h3>{{ index }}</h3>
                   <ul class="list-unstyled">
                     <li v-for="(permission, sub) in submenu" :key="sub">
-                      <h2>{{ sub }}</h2>
+                      <h5>{{ sub }}</h5>
                       <ul class="list-unstyled">
                         <li v-for="(perm, i) in permission" :key="i">
                           <div class="form-group row">
                             <div class="col-sm-1"></div>
                             <div class="col-sm-10 col-sm-offset-2">
-                              <div class="form-check">
+                              <label class="container_check"
+                                >{{ titleCase(perm.name) }}
                                 <input
-                                  class="form-check-input"
                                   type="checkbox"
                                   :value="perm.id"
                                   v-model="form.selected_permissions"
                                 />
-                                <label
-                                  class="form-check-label"
-                                  for="gridCheck1"
-                                >
-                                  {{ titleCase(perm.name) }}
-                                </label>
-                              </div>
+                                <span class="checkmark"></span>
+                              </label>
                             </div>
                           </div>
                         </li>

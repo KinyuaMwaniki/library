@@ -14208,11 +14208,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -15013,7 +15008,7 @@ var render = function() {
                       { staticClass: "list-unstyled" },
                       _vm._l(submenu, function(permission, sub) {
                         return _c("li", { key: sub }, [
-                          _c("h2", [_vm._v(_vm._s(sub))]),
+                          _c("h5", [_vm._v(_vm._s(sub))]),
                           _vm._v(" "),
                           _c(
                             "ul",
@@ -15029,89 +15024,85 @@ var render = function() {
                                       staticClass: "col-sm-10 col-sm-offset-2"
                                     },
                                     [
-                                      _c("div", { staticClass: "form-check" }, [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value:
-                                                _vm.form.selected_permissions,
-                                              expression:
-                                                "form.selected_permissions"
-                                            }
-                                          ],
-                                          staticClass: "form-check-input",
-                                          attrs: { type: "checkbox" },
-                                          domProps: {
-                                            value: perm.id,
-                                            checked: Array.isArray(
-                                              _vm.form.selected_permissions
-                                            )
-                                              ? _vm._i(
+                                      _c(
+                                        "label",
+                                        { staticClass: "container_check" },
+                                        [
+                                          _vm._v(
+                                            _vm._s(_vm.titleCase(perm.name)) +
+                                              "\n                              "
+                                          ),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
                                                   _vm.form.selected_permissions,
-                                                  perm.id
-                                                ) > -1
-                                              : _vm.form.selected_permissions
-                                          },
-                                          on: {
-                                            change: function($event) {
-                                              var $$a =
-                                                  _vm.form.selected_permissions,
-                                                $$el = $event.target,
-                                                $$c = $$el.checked
-                                                  ? true
-                                                  : false
-                                              if (Array.isArray($$a)) {
-                                                var $$v = perm.id,
-                                                  $$i = _vm._i($$a, $$v)
-                                                if ($$el.checked) {
-                                                  $$i < 0 &&
-                                                    _vm.$set(
-                                                      _vm.form,
-                                                      "selected_permissions",
-                                                      $$a.concat([$$v])
-                                                    )
+                                                expression:
+                                                  "form.selected_permissions"
+                                              }
+                                            ],
+                                            attrs: { type: "checkbox" },
+                                            domProps: {
+                                              value: perm.id,
+                                              checked: Array.isArray(
+                                                _vm.form.selected_permissions
+                                              )
+                                                ? _vm._i(
+                                                    _vm.form
+                                                      .selected_permissions,
+                                                    perm.id
+                                                  ) > -1
+                                                : _vm.form.selected_permissions
+                                            },
+                                            on: {
+                                              change: function($event) {
+                                                var $$a =
+                                                    _vm.form
+                                                      .selected_permissions,
+                                                  $$el = $event.target,
+                                                  $$c = $$el.checked
+                                                    ? true
+                                                    : false
+                                                if (Array.isArray($$a)) {
+                                                  var $$v = perm.id,
+                                                    $$i = _vm._i($$a, $$v)
+                                                  if ($$el.checked) {
+                                                    $$i < 0 &&
+                                                      _vm.$set(
+                                                        _vm.form,
+                                                        "selected_permissions",
+                                                        $$a.concat([$$v])
+                                                      )
+                                                  } else {
+                                                    $$i > -1 &&
+                                                      _vm.$set(
+                                                        _vm.form,
+                                                        "selected_permissions",
+                                                        $$a
+                                                          .slice(0, $$i)
+                                                          .concat(
+                                                            $$a.slice($$i + 1)
+                                                          )
+                                                      )
+                                                  }
                                                 } else {
-                                                  $$i > -1 &&
-                                                    _vm.$set(
-                                                      _vm.form,
-                                                      "selected_permissions",
-                                                      $$a
-                                                        .slice(0, $$i)
-                                                        .concat(
-                                                          $$a.slice($$i + 1)
-                                                        )
-                                                    )
+                                                  _vm.$set(
+                                                    _vm.form,
+                                                    "selected_permissions",
+                                                    $$c
+                                                  )
                                                 }
-                                              } else {
-                                                _vm.$set(
-                                                  _vm.form,
-                                                  "selected_permissions",
-                                                  $$c
-                                                )
                                               }
                                             }
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c(
-                                          "label",
-                                          {
-                                            staticClass: "form-check-label",
-                                            attrs: { for: "gridCheck1" }
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                " +
-                                                _vm._s(
-                                                  _vm.titleCase(perm.name)
-                                                ) +
-                                                "\n                              "
-                                            )
-                                          ]
-                                        )
-                                      ])
+                                          }),
+                                          _vm._v(" "),
+                                          _c("span", {
+                                            staticClass: "checkmark"
+                                          })
+                                        ]
+                                      )
                                     ]
                                   )
                                 ])
