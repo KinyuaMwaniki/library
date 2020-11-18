@@ -14,12 +14,12 @@
 
 Route::group(['middleware' => ['auth']], function () {
     // Roles
-    Route::get('/roles', 'RoleController@index')->name('role.index');
-    Route::get('/role/create', 'RoleController@create')->name('role.create');
-    Route::post('/role', 'RoleController@store')->name('role.store');
-    Route::get('/role/{role}/edit', 'RoleController@edit')->name('role.edit');
-    Route::patch('/role/{role}', 'RoleController@update')->name('role.update');
-    Route::delete('/role/{role}', 'RoleController@destroy')->name('role.destroy');
+    Route::get('/roles', 'RoleController@index')->name('role.index')->permission('read_roles');
+    Route::get('/role/create', 'RoleController@create')->name('role.create')->permission('create_roles');
+    Route::post('/role', 'RoleController@store')->name('role.store')->permission('create_roles');
+    Route::get('/role/{role}/edit', 'RoleController@edit')->name('role.edit')->permission('update_roles');
+    Route::patch('/role/{role}', 'RoleController@update')->name('role.update')->permission('update_roles');
+    Route::delete('/role/{role}', 'RoleController@destroy')->name('role.destroy')->permission('delete_roles');
 
 
     // Permissions

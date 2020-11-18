@@ -118,4 +118,12 @@ class PermissionsApiController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Permissions saved'], 200);
     }
+
+    public function getMenuPermissions(Request $request)
+    {
+
+        $permissions = Permission::whereIn('menu', $request->menus)->pluck('id')->toArray();
+        return response()->json(['permissions' => $permissions, 'success' => true, 'message' => 'Permissions retrieved'], 200);
+
+    }
 }

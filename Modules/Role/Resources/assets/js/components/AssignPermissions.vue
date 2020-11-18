@@ -21,10 +21,6 @@
             <div class="col-sm-12">
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="call_type">
-                    Role
-                    <span class="required-marker">*&nbsp;</span>
-                  </label>
                   <select
                     class="form-control"
                     name="call_type"
@@ -53,7 +49,7 @@
             <ul class="list-unstyled">
               <li v-for="(submenu, index) in permissions" :key="index">
                 <div class="col-sm-6">
-                  <h3>{{ index }}</h3>
+                    <h3>{{ index }}</h3>
                   <ul class="list-unstyled">
                     <li v-for="(permission, sub) in submenu" :key="sub">
                       <h2>{{ sub }}</h2>
@@ -73,7 +69,7 @@
                                   class="form-check-label"
                                   for="gridCheck1"
                                 >
-                                  {{ perm.name }}
+                                  {{ titleCase(perm.name) }}
                                 </label>
                               </div>
                             </div>
@@ -109,8 +105,10 @@
 
 <script>
 import ValidatorMixin from "../mixins/Validator.vue";
+import UtilitiesMixin from "../mixins/Utilities.vue";
+
 export default {
-  mixins: [ValidatorMixin],
+  mixins: [ValidatorMixin, UtilitiesMixin],
   data() {
     return {
       errors: [],
@@ -118,17 +116,38 @@ export default {
       success_message: null,
       roles: "",
       permissions: null,
+      selected_menu: [],
       form: {
         role: "",
         selected_permissions: [],
       },
     };
   },
+  // watch: {
+  //   selected_menu: "updateMenuPermissions",
+  // },
   created() {
     this.getRoles();
     this.getAllPermissions();
   },
   methods: {
+    // updateMenuPermissions() {
+    //   console.log(this.selected_menu);
+    //   axios
+    //     .get("/api/v1/get-menu-permissions", {
+    //       params: {
+    //         menus: this.selected_menu,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       this.form.selected_permissions = response.data.permissions;
+    //     })
+    //     .catch((err) =>
+    //       this.errors.push(
+    //         "Unable to load menu permissions. Please refresh the page"
+    //       )
+    //     );
+    // },
     getAllPermissions() {
       axios
         .get("/api/v1/get-all-permissions")
@@ -183,6 +202,7 @@ export default {
         .then((response) => {
           if (response.data.success == true) {
             this.success_message = response.data.message;
+            // window.location = '/permissions';
           }
         })
         .catch(function (error) {

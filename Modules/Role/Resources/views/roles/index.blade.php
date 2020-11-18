@@ -7,7 +7,9 @@
         </div>
         <div class="title_right">
             <div class="col-md-5 col-sm-5  form-group pull-right">
-                <a href="{!!  route('role.create') !!}" class="btn btn-primary pull-right" type="button">Add New</a>
+                @can('create_roles')
+                    <a href="{!!  route('role.create') !!}" class="btn btn-primary pull-right" type="button">Add New</a>
+                @endcan
             </div>
         </div>
     </div>
@@ -28,14 +30,18 @@
                         <td class="text-right">
                             {!! Form::open(['route' => ['role.destroy', $role->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
+                                @can('update_roles') 
                                 <a href="{{ route('role.edit', $role->id) }}" class='btn btn-default btn-xs'>
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </a>
+                                @endcan
+                                @can('delete_roles')
                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'type' => 'submit',
                                 'class' => 'btn btn-danger btn-xs',
                                 'onclick' => "return confirm('Are you sure?')",
                                 ]) !!}
+                                @endcan
                             </div>
                             {!! Form::close() !!}
                         </td>
