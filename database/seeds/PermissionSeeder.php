@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
@@ -23,10 +24,9 @@ class PermissionSeeder extends Seeder
             {
                 foreach($permissions as $permission)
                 {
-                    // info($menu . " - " . $sub_menu . " - " . $permission);
                     $perm_check = Permission::where('name', $permission)->first();
                     if (!$perm_check) {
-                        DB::table('permissions')->insert([
+                        $permission = Permission::create([
                             'name' => $permission,
                             'guard_name' => 'web',
                             'menu' => $menu,
@@ -36,5 +36,13 @@ class PermissionSeeder extends Seeder
                 }
             }
         }
+
+        
+        $role = Role::firstOrCreate(
+            ['name' =>  'WizagAdmin'],
+            ['name' => 'WizagAdmin']
+        );
+
+        $role->givePermissionTo(Permission::where('guard_name', 'web')->get());
     }
 }

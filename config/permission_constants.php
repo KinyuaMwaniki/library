@@ -3,8 +3,7 @@
 // Add menus, submenus, and their permissions
 
 return [
-    'permissions' => [
-        
+    'permissions' => [        
         'Inventory Menu' => [
             'Inventory List' => [
                 'create_inventory',
@@ -40,14 +39,5 @@ return [
                 'delete_permissions',
             ],
         ],
-        
-        'Test Menu' => [
-            'Test Sub Menu' => [
-                'create_submenu',
-                'read_submenu',
-                'update_submenu',
-                'delete_submenu',
-            ]
-        ]
     ]
 ];

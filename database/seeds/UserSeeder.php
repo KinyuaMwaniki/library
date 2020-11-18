@@ -1,6 +1,8 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -11,12 +13,30 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
+        $user = User::where('email', 'admin@wizag.biz')->first();
+        if (!$user) {             
+                $user = User::create([
+                    'name' => 'Administrator',
+                    'email' => 'admin@wizag.biz',
+                    'password' => Hash::make('password'),
+                    ]);
+        }
+        else
+        {
+            $this->command->info('admin@wizag.biz already exists');
+        }
 
-        DB::table('users')->insert([
-            'name' => 'Administrator',
-            'email' => 'admin@wizag.biz',
-            'password' => Hash::make('password'),
-        ]);
+        $role = Role::firstOrCreate(
+            ['name' =>  'WizagAdmin'],
+            ['name' => 'WizagAdmin']
+        );
+
+
+
+        if(!$user->hasRole($role))
+        {
+            $user->assignRole('WizagAdmin');
+        }
+
     }
 }
