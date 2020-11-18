@@ -22,7 +22,7 @@ Route::group(
         Route::get('get-roles', 'PermissionsApiController@getRoles')->name('roles.api.get-roles');
         Route::get('get-permissions', 'PermissionsApiController@getPermissions')->name('roles.api.get-permissions');
         Route::get('get-all-permissions', 'PermissionsApiController@getAllPermissions')->name('roles.api.get-all-permissions');
-
-        
+        Route::post('save-permissions', 'PermissionsApiController@savePermissions')->name('roles.api.save-permissions');
     }
 );
+

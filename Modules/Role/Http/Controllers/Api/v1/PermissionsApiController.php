@@ -87,12 +87,35 @@ class PermissionsApiController extends Controller
 
     public function getPermissions(Request $request)
     {
-        info($request->all());
+        $role = Role::find($request->role);
+
+        if(!$role)
+        {
+            return response()->json(['success' => false, 'error' => 'Selected Role not found'], 500);
+        }
+
+        $permissions = Role::findByName($role->name)->permissions->pluck('id')->toArray();
+
+        return response()->json(['permissions' => $permissions, 'success' => true, 'message' => 'Permissions retrieved'], 200);
+
     }
 
     public function getAllPermissions()
     {
         $all_permissions = Permission::select('id','name', 'menu', 'submenu')->get()->groupBy(['menu', 'submenu']);
         return response()->json(['all_permissions' => $all_permissions], 200);
+    }
+
+    public function savePermissions(Request $request)
+    {
+
+        $role = Role::find($request->role);
+        if(!$role)
+        {
+            return response()->json(['success' => false, 'error' => 'Selected Role not found'], 500);
+        }
+        $role->syncPermissions($request->selected_permissions);
+
+        return response()->json(['success' => true, 'message' => 'Permissions saved'], 200);
     }
 }

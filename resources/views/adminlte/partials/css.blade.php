@@ -12,6 +12,11 @@
 <link href="{{ asset('css/buttons.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/colReorder.dataTables.min.css') }}" rel="stylesheet">
 
+<link href="https://colorlib.com/polygon/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+<link href="https://colorlib.com/polygon/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+
+
 
 
 

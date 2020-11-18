@@ -13995,6 +13995,57 @@ Vue.component('assign-permissions', __webpack_require__(/*! ./AssignPermissions.
 
 /***/ }),
 
+/***/ "./Resources/assets/js/mixins/Validator.vue":
+/*!**************************************************!*\
+  !*** ./Resources/assets/js/mixins/Validator.vue ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Validator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Validator.vue?vue&type=script&lang=js& */ "./Resources/assets/js/mixins/Validator.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Validator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Validator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _Validator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "Resources/assets/js/mixins/Validator.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./Resources/assets/js/mixins/Validator.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./Resources/assets/js/mixins/Validator.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Validator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Validator.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./Resources/assets/js/mixins/Validator.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Validator_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./Resources/assets/js/components/AssignPermissions.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./Resources/assets/js/components/AssignPermissions.vue?vue&type=script&lang=js& ***!
@@ -14004,6 +14055,7 @@ Vue.component('assign-permissions', __webpack_require__(/*! ./AssignPermissions.
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mixins_Validator_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../mixins/Validator.vue */ "./Resources/assets/js/mixins/Validator.vue");
 //
 //
 //
@@ -14078,15 +14130,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_Validator_vue__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
       errors: [],
+      test_value: 10,
       success_message: null,
       roles: "",
-      permissions: "",
+      permissions: null,
       form: {
-        role: ""
+        role: "",
+        selected_permissions: []
       }
     };
   },
@@ -14107,11 +14198,14 @@ __webpack_require__.r(__webpack_exports__);
     getPermissions: function getPermissions() {
       var _this2 = this;
 
+      this.errors = [];
+      this.success_message = null;
       axios.get("/api/v1/get-permissions", {
         params: {
-          role_id: this.form.role
+          role: this.form.role
         }
-      }).then(function (response) {// this.roles = response.data.roles;
+      }).then(function (response) {
+        _this2.form.selected_permissions = response.data.permissions;
       })["catch"](function (err) {
         return _this2.errors.push("Unable to load permissions. Please refresh the page");
       });
@@ -14124,6 +14218,62 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         return _this3.errors.push("Unable to load roles. Please refresh the page");
       });
+    },
+    submitData: function submitData() {
+      var _this4 = this;
+
+      // this.checkForm();
+      if (this.errors.length > 0) {
+        return;
+      }
+
+      var uri = "/api/v1/save-permissions";
+      var submit_method = "POST";
+      var submit_data = this.form;
+      axios({
+        method: submit_method,
+        url: uri,
+        data: submit_data
+      }).then(function (response) {
+        if (response.data.success == true) {
+          _this4.success_message = response.data.message;
+        }
+      })["catch"](function (error) {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+
+        console.log(error.config);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./Resources/assets/js/mixins/Validator.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./Resources/assets/js/mixins/Validator.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    checkForm: function checkForm(e) {
+      this.errors = [];
+
+      if (this.form.selected_permissions.length == 0) {
+        this.errors.push("No permission selected");
+      }
     }
   }
 });
@@ -14692,7 +14842,9 @@ var render = function() {
                                 : $$selectedVal[0]
                             )
                           },
-                          _vm.getPermissions
+                          function($event) {
+                            return _vm.getPermissions()
+                          }
                         ]
                       }
                     },
@@ -14737,41 +14889,146 @@ var render = function() {
           _c("div", { staticClass: "col-sm-12" }, [
             _c(
               "ul",
+              { staticClass: "list-unstyled" },
               _vm._l(_vm.permissions, function(submenu, index) {
                 return _c("li", { key: index }, [
-                  _vm._v(
-                    "\n              " + _vm._s(index) + "\n              "
-                  ),
-                  _c(
-                    "ul",
-                    _vm._l(submenu, function(permission, sub) {
-                      return _c("li", { key: sub }, [
-                        _vm._v(
-                          "\n                  " +
-                            _vm._s(sub) +
-                            "\n                  "
-                        ),
-                        _c(
-                          "ul",
-                          _vm._l(permission, function(perm, i) {
-                            return _c("li", { key: i }, [
-                              _vm._v(
-                                "\n                      " +
-                                  _vm._s(perm) +
-                                  "\n                    "
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      ])
-                    }),
-                    0
-                  )
+                  _c("div", { staticClass: "col-sm-6" }, [
+                    _c("h3", [_vm._v(_vm._s(index))]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      { staticClass: "list-unstyled" },
+                      _vm._l(submenu, function(permission, sub) {
+                        return _c("li", { key: sub }, [
+                          _c("h2", [_vm._v(_vm._s(sub))]),
+                          _vm._v(" "),
+                          _c(
+                            "ul",
+                            { staticClass: "list-unstyled" },
+                            _vm._l(permission, function(perm, i) {
+                              return _c("li", { key: i }, [
+                                _c("div", { staticClass: "form-group row" }, [
+                                  _c("div", { staticClass: "col-sm-1" }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "col-sm-10 col-sm-offset-2"
+                                    },
+                                    [
+                                      _c("div", { staticClass: "form-check" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.form.selected_permissions,
+                                              expression:
+                                                "form.selected_permissions"
+                                            }
+                                          ],
+                                          staticClass: "form-check-input",
+                                          attrs: { type: "checkbox" },
+                                          domProps: {
+                                            value: perm.id,
+                                            checked: Array.isArray(
+                                              _vm.form.selected_permissions
+                                            )
+                                              ? _vm._i(
+                                                  _vm.form.selected_permissions,
+                                                  perm.id
+                                                ) > -1
+                                              : _vm.form.selected_permissions
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              var $$a =
+                                                  _vm.form.selected_permissions,
+                                                $$el = $event.target,
+                                                $$c = $$el.checked
+                                                  ? true
+                                                  : false
+                                              if (Array.isArray($$a)) {
+                                                var $$v = perm.id,
+                                                  $$i = _vm._i($$a, $$v)
+                                                if ($$el.checked) {
+                                                  $$i < 0 &&
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "selected_permissions",
+                                                      $$a.concat([$$v])
+                                                    )
+                                                } else {
+                                                  $$i > -1 &&
+                                                    _vm.$set(
+                                                      _vm.form,
+                                                      "selected_permissions",
+                                                      $$a
+                                                        .slice(0, $$i)
+                                                        .concat(
+                                                          $$a.slice($$i + 1)
+                                                        )
+                                                    )
+                                                }
+                                              } else {
+                                                _vm.$set(
+                                                  _vm.form,
+                                                  "selected_permissions",
+                                                  $$c
+                                                )
+                                              }
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "form-check-label",
+                                            attrs: { for: "gridCheck1" }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                " +
+                                                _vm._s(perm.name) +
+                                                "\n                              "
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]
+                                  )
+                                ])
+                              ])
+                            }),
+                            0
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ])
                 ])
               }),
               0
             )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-12" }, [
+            _c("div", { staticClass: "col-sm-12" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary pull-right",
+                    attrs: { type: "button" },
+                    on: { click: _vm.submitData }
+                  },
+                  [_vm._v("\n                Submit\n              ")]
+                )
+              ])
+            ])
           ])
         ])
       ])

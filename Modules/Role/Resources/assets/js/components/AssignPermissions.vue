@@ -30,7 +30,7 @@
                     name="call_type"
                     id="call_type"
                     v-model="form.role"
-                    @change="getPermissions"
+                    @change="getPermissions()"
                   >
                     <option selected="true" disabled="disabled" value="">
                       Select Role
@@ -50,21 +50,55 @@
           </form>
 
           <div class="col-sm-12">
-            <ul>
+            <ul class="list-unstyled">
               <li v-for="(submenu, index) in permissions" :key="index">
-                {{ index }}
-                <ul>
-                  <li v-for="(permission, sub) in submenu" :key="sub">
-                    {{ sub }}
-                    <ul>
-                      <li v-for="(perm, i) in permission" :key="i">
-                        {{ perm }}
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
+                <div class="col-sm-6">
+                  <h3>{{ index }}</h3>
+                  <ul class="list-unstyled">
+                    <li v-for="(permission, sub) in submenu" :key="sub">
+                      <h2>{{ sub }}</h2>
+                      <ul class="list-unstyled">
+                        <li v-for="(perm, i) in permission" :key="i">
+                          <div class="form-group row">
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-10 col-sm-offset-2">
+                              <div class="form-check">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  :value="perm.id"
+                                  v-model="form.selected_permissions"
+                                />
+                                <label
+                                  class="form-check-label"
+                                  for="gridCheck1"
+                                >
+                                  {{ perm.name }}
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
               </li>
             </ul>
+          </div>
+
+          <div class="col-sm-12">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="btn btn-primary pull-right"
+                  @click="submitData"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -72,16 +106,21 @@
   </div>
 </template>
 
+
 <script>
+import ValidatorMixin from "../mixins/Validator.vue";
 export default {
+  mixins: [ValidatorMixin],
   data() {
     return {
       errors: [],
+      test_value: 10,
       success_message: null,
       roles: "",
-      permissions: "",
+      permissions: null,
       form: {
         role: "",
+        selected_permissions: [],
       },
     };
   },
@@ -103,14 +142,16 @@ export default {
         );
     },
     getPermissions() {
+      this.errors = [];
+      this.success_message = null;
       axios
         .get("/api/v1/get-permissions", {
           params: {
-            role_id: this.form.role,
+            role: this.form.role,
           },
         })
         .then((response) => {
-          // this.roles = response.data.roles;
+          this.form.selected_permissions = response.data.permissions;
         })
         .catch((err) =>
           this.errors.push(
@@ -127,6 +168,35 @@ export default {
         .catch((err) =>
           this.errors.push("Unable to load roles. Please refresh the page")
         );
+    },
+    submitData() {
+      // this.checkForm();
+
+      if (this.errors.length > 0) {
+        return;
+      }
+      let uri = "/api/v1/save-permissions";
+      let submit_method = "POST";
+
+      let submit_data = this.form;
+      axios({ method: submit_method, url: uri, data: submit_data })
+        .then((response) => {
+          if (response.data.success == true) {
+            this.success_message = response.data.message;
+          }
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
     },
   },
 };
