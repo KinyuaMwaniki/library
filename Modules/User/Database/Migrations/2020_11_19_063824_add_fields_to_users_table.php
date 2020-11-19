@@ -19,11 +19,39 @@ class AddFieldsToUsersTable extends Migration
             $table->string('last_name')->nullable()->after('middle_name');
             $table->date('birthday')->nullable()->after('email');
             $table->string('gender')->nullable()->after('birthday');
-            $table->string('telephone')->nullable()->after('gender');
+            $table->string('TelWork')->nullable()->after('gender');
             $table->string('id_no')->nullable()->after('telephone');
             $table->string('employee_id')->nullable()->after('id_no');
             $table->integer('department_id')->nullable()->after('employee_id');
             $table->string('can_access')->nullable()->after('department_id');
+
+            idAgents
+            bSysAccount
+            UserName
+            Title
+            Description
+            Mobile
+            TelHome
+            Comments
+            AddressStreet
+            AddressPOBox
+            AddressCity
+            AddressState
+            AddressZip
+            AddressCountry
+            CanChangePassword
+            MustChangePwdOnLogin
+            ChangePwdDays
+            PwdLastChange
+            PasswordHint
+            AgentOutOffice
+            CanSetOutOfOffice
+            AgentActive
+            UserGroupID
+            AutoLogout
+            AutoLogOutMinutes
+
+
             $table->softDeletes(); 
         });
     }
@@ -36,7 +64,7 @@ class AddFieldsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['first_name', 'middle_name', 'last_name', 'birthday', 'gender', 'telephone', 'id_no', 'employee_id', 'department_id', 'can_access']);
+            $table->dropColumn(['first_name', 'middle_name', 'last_name', 'birthday', 'gender', 'TelWork', 'id_no', 'employee_id', 'department_id', 'can_access']);
             $table->dropSoftDeletes();
         });
     }
