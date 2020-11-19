@@ -1,19 +1,34 @@
-<div class="item form-group">
-    <label class="col-form-label col-md-2 col-sm-2 label-align" for="first-name">Role Name<span
-            class="required">*</span>
-    </label>
-    <div class="col-md-6 col-sm-6 ">
-        {{-- <input type="text" id="name" name="name" required="required" class="form-control "> --}}
-        {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        @error('name')
-            <div class="error text-danger">{{ $message }}</div>
-        @enderror
-        <input type="hidden" name="guard_name" value="web">
-    </div>
+<!-- Code Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('code', 'Code<span class="required-marker">*</span>','',false) !!}
+    {!! Form::text('code', null, ['class' => 'form-control', 'required' => 'required']) !!}
 </div>
-<div class="item form-group">
-    <div class="col-md-6 col-sm-6 offset-md-2 text-right">
-        <button type="submit" class="btn btn-success">Submit</button>
-        <a href="{{ route('role.index') }}" class="btn btn-primary">Cancel</a>
-    </div>
+
+<!-- Sales Account Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('sales_ledger_id', 'Sales Account<span class="required-marker">*</span>','',false) !!}
+    {!! Form::select('sales_ledger_id', ['1' => 'Account One' , '2' => 'Account Two' , '3' => 'Account Three'], null, ['class' => 'form-control select2']) !!}
+</div>
+
+<!-- Purchase Account Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('purchase_ledger_id', 'Purchase Account<span class="required-marker">*</span>','',false) !!}
+    {!! Form::select('purchase_ledger_id', ['1' => 'Account One' , '2' => 'Account Two' , '3' => 'Account Three'], null, ['class' => 'form-control select2']) !!}
+</div>
+
+<!-- Adjustment Account Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('adjustment_ledger_id', 'Adjustment Account<span class="required-marker">*</span>','',false) !!}
+    {!! Form::select('adjustment_ledger_id', ['1' => 'Account One' , '2' => 'Account Two' , '3' => 'Account Three'], null, ['class' => 'form-control select2']) !!}
+</div>
+
+<!-- Description Field -->
+<div class="form-group col-sm-12">
+    {!! Form::label('description', 'Description') !!}
+    {!! Form::textarea('description', null, ['class' => 'form-control summernote']) !!}
+</div>
+
+<div class="form-group col-sm-12">
+    {!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
+    <a href="{{ route('stk_group.index') }}" class="btn btn-primary">Cancel</a>
 </div>
