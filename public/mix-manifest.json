@@ -59,5 +59,6 @@
     "/css/green@2x.png": "/css/green@2x.png",
     "/js/icheck.js": "/js/icheck.js",
     "/css/vendor-bs-drp-daterangepicker.css": "/css/vendor-bs-drp-daterangepicker.css",
-    "/js/inventory.js": "/js/inventory.js"
+    "/js/inventory.js": "/js/inventory.js",
+    "/js/role.js": "/js/role.js"
 }
