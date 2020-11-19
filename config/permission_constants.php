@@ -4,28 +4,16 @@
 
 return [
     'permissions' => [        
-        'Inventory Menu' => [
-            'Inventory List' => [
-                'create_inventory',
-                'read_inventory',
-                'update_inventory',
-                'delete_inventory',
-            ],
-            'Transfer Inventory' => [
-                'create_transfer_inventory',
-                'read_transfer_inventory',
-                'update_transfer_inventory',
-                'delete_transfer_inventory',
-            ],
-            'Internal Grn' => [
-                'create_internal_grn',
-                'read_internal_grn',
-                'update_internal_grn',
-                'delete_internal_grn',
-            ],
+        'User Management' => [
+            'Users' => [
+                'create_users',
+                'read_users',
+                'update_users',
+                'delete_users',
+            ]
         ],
 
-        'Access Control Menu' => [
+        'Access Control' => [
             'Roles' => [
                 'create_roles',
                 'read_roles',
