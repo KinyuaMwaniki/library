@@ -34,7 +34,7 @@
 <script src="{{ asset('js/dataTables.colReorder.min.js') }}"></script>
 <script src="{{ asset('js/switchery.min.js') }}"></script>
 <script src="{{ asset('js/select2.min.js') }}"></script>
-<script src="{{ asset('js/summernote.min.js') }}"></script>
+<script src="{{ asset('js/summernote-bs4.min.js') }}"></script>
 
 
 
