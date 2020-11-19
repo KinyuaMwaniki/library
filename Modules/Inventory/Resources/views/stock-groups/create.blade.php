@@ -26,6 +26,5 @@
                 height: 150
             });
         });
-
     </script>
 @endsection

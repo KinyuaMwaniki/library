@@ -5,6 +5,8 @@ namespace Modules\Inventory\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
+use Modules\Inventory\Entities\StkGroup;
 use Modules\Role\Http\Requests\StoreRoleRequest;
 use Modules\Inventory\Http\Requests\CreateStockGroupRequest;
 
@@ -16,7 +18,8 @@ class StockGroupController extends Controller
      */
     public function index()
     {
-        return view('inventory::stock-groups.index');
+        $stock_groups = StkGroup::all();
+        return view('inventory::stock-groups.index', compact('stock_groups'));
     }
 
     /**
@@ -35,7 +38,16 @@ class StockGroupController extends Controller
      */
     public function store(CreateStockGroupRequest $request)
     {
-        info($request->all());
+        $stk_group = StkGroup::create([
+            'code' => $request->code,
+            'sales_ledger_id' => $request->sales_ledger_id,
+            'purchase_ledger_id' => $request->purchase_ledger_id,
+            'adjustment_ledger_id' => $request->adjustment_ledger_id,
+            'description' => $request->description,
+        ]);
+
+        Session::flash('message', "Stock Group Saved");
+        return redirect(route('stk_group.index'));
     }
 
     /**

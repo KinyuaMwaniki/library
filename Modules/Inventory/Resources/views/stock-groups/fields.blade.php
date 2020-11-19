@@ -7,6 +7,17 @@
 @enderror
 </div>
 
+<!-- Description Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('description', 'Description') !!}
+    {!! Form::text('description', null, ['class' => 'form-control']) !!}
+    @error('description')
+    <div class="error text-danger">{{ $message }}</div>
+@enderror
+</div>
+
+{{-- TODO: Change to accounts model once added --}}
+
 <!-- Sales Account Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('sales_ledger_id', 'Sales Account<span class="required-marker">*</span>','',false) !!}
@@ -30,15 +41,6 @@
     {!! Form::label('adjustment_ledger_id', 'Adjustment Account<span class="required-marker">*</span>','',false) !!}
     {!! Form::select('adjustment_ledger_id', ['1' => 'Account One' , '2' => 'Account Two' , '3' => 'Account Three'], null, ['class' => 'form-control select2']) !!}
     @error('adjustment_ledger_id')
-    <div class="error text-danger">{{ $message }}</div>
-@enderror
-</div>
-
-<!-- Description Field -->
-<div class="form-group col-sm-12">
-    {!! Form::label('description', 'Description') !!}
-    {!! Form::textarea('description', null, ['class' => 'form-control summernote']) !!}
-    @error('description')
     <div class="error text-danger">{{ $message }}</div>
 @enderror
 </div>

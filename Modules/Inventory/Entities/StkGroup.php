@@ -6,7 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class StkGroup extends Model
 {
-    protected $fillable = [];
+    protected $fillable = [
+        'code',
+        'sales_ledger_id',
+        'purchase_ledger_id',
+        'adjustment_ledger_id',
+        'description',
+    ];
+
     protected $table = 'stkGroup';
     protected $primaryKey = 'group_id';
 }
