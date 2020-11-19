@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-title row">
-        <div class="title_left">
+        <div class="title_left ml-4">
             <h3>Add Stock Group</h3>
         </div>
     </div>
@@ -15,3 +15,5 @@
         </div>
     </div>
 @endsection
+
+
