@@ -41,6 +41,11 @@
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </a>
                                 @endcan
+                                @can('read_stock_group') 
+                                <a href="{{ route('stk_group.show', $stock_group->group_id) }}" class='btn btn-default btn-xs'>
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                </a>
+                                @endcan
                                 @can('delete_stock_group')
                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'type' => 'submit',

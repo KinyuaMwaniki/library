@@ -7,8 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Session;
 use Modules\Inventory\Entities\StkGroup;
-use Modules\Role\Http\Requests\StoreRoleRequest;
 use Modules\Inventory\Http\Requests\CreateStockGroupRequest;
+use Modules\Inventory\Http\Requests\UpdateStockGroupRequest;
 
 class StockGroupController extends Controller
 {
@@ -57,7 +57,8 @@ class StockGroupController extends Controller
      */
     public function show($id)
     {
-        return view('inventory::show');
+        info("All Show");
+        // return view('inventory::show');
     }
 
     /**
@@ -67,7 +68,14 @@ class StockGroupController extends Controller
      */
     public function edit($id)
     {
-        return view('inventory::edit');
+        $stock_group = StkGroup::find($id);
+        
+        if (empty($stock_group)) {
+            Session::flash('message', "Stock Group Not Found");
+            return redirect(route('stk_group.index'));
+        }
+
+        return view('inventory::stock-groups.edit', compact('stock_group'));
     }
 
     /**
@@ -76,9 +84,25 @@ class StockGroupController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateStockGroupRequest $request, $id)
     {
-        //
+        $stock_group = StkGroup::find($id);
+        
+        if (empty($stock_group)) {
+            Session::flash('message', "Stock Group Not Found");
+            return redirect(route('stk_group.index'));
+        }
+
+        $stock_group->update([
+            'code' => $request->code,
+            'sales_ledger_id' => $request->sales_ledger_id,
+            'purchase_ledger_id' => $request->purchase_ledger_id,
+            'adjustment_ledger_id' => $request->adjustment_ledger_id,
+            'description' => $request->description,
+        ]);
+
+        Session::flash('message', "Stock Group Updated");
+        return redirect(route('stk_group.index'));
     }
 
     /**
@@ -88,6 +112,15 @@ class StockGroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $stock_group = StkGroup::find($id);
+        
+        if (empty($stock_group)) {
+            Session::flash('message', "Stock Group Not Found");
+            return redirect(route('stk_group.index'));
+        }
+
+        $stock_group->delete();
+        Session::flash('message', "Stock Group Deleted");
+        return redirect(route('stk_group.index'));    
     }
 }

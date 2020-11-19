@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-title row">
         <div class="title_left">
-            <h3>Edit Role {{ $role->id }}</h3>
+            <h3>Edit Role</h3>
         </div>
     </div>
     <div class="row">

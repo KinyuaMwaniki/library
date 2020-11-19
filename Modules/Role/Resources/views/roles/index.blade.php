@@ -18,7 +18,6 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Guard Name</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
@@ -26,7 +25,6 @@
                 @foreach ($roles as $role)
                     <tr>
                         <td>{{ $role->name }}</td>
-                        <td>{{ $role->guard_name }}</td>
                         <td class="text-right">
                             {!! Form::open(['route' => ['role.destroy', $role->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
@@ -51,7 +49,6 @@
             <tfoot>
                 <tr>
                     <th>Name</th>
-                    <th>Guard Name</th>
                     <th>Actions</th>
                 </tr>
             </tfoot>
