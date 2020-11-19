@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 ">
-            {!! Form::open(['route' => 'role.store']) !!}
+            {!! Form::open(['route' => 'user.store']) !!}
             @include('user::users.fields')
             {!! Form::close() !!}
 
