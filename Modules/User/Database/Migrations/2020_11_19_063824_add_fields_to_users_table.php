@@ -25,31 +25,31 @@ class AddFieldsToUsersTable extends Migration
             $table->integer('department_id')->nullable()->after('employee_id');
             $table->string('can_access')->nullable()->after('department_id');
 
-            idAgents
-            bSysAccount
-            UserName
-            Title
-            Description
-            Mobile
-            TelHome
-            Comments
-            AddressStreet
-            AddressPOBox
-            AddressCity
-            AddressState
-            AddressZip
-            AddressCountry
-            CanChangePassword
-            MustChangePwdOnLogin
-            ChangePwdDays
-            PwdLastChange
-            PasswordHint
-            AgentOutOffice
-            CanSetOutOfOffice
-            AgentActive
-            UserGroupID
-            AutoLogout
-            AutoLogOutMinutes
+            $table->integer('idAgents')->nullable();
+            $table->boolean('bSysAccount')->nullable();
+            $table->string('UserName')->nullable();
+            $table->string('Title')->nullable();
+            $table->string('Description')->nullable();
+            $table->string('Mobile')->nullable();
+            $table->string('TelHome')->nullable();
+            $table->string('Comments')->nullable();
+            $table->string('AddressStreet')->nullable();
+            $table->string('AddressPOBox')->nullable();
+            $table->string('AddressCity')->nullable();
+            $table->string('AddressState')->nullable();
+            $table->string('AddressZip')->nullable();
+            $table->string('AddressCountry')->nullable();
+            $table->boolean('CanChangePassword')->nullable();
+            $table->boolean('MustChangePwdOnLogin')->nullable();
+            $table->integer('ChangePwdDays')->nullable();
+            $table->date('PwdLastChange')->nullable();
+            $table->string('PasswordHint')->nullable();
+            $table->boolean('AgentOutOffice')->nullable();
+            $table->boolean('CanSetOutOfOffice')->nullable();
+            $table->boolean('AgentActive')->nullable();
+            $table->boolean('UserGroupID')->nullable();
+            $table->boolean('AutoLogout')->nullable();
+            $table->boolean('AutoLogOutMinutes')->nullable();
 
 
             $table->softDeletes(); 
