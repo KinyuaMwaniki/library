@@ -5,6 +5,8 @@ namespace Modules\Inventory\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Role\Http\Requests\StoreRoleRequest;
+use Modules\Inventory\Http\Requests\CreateStockGroupRequest;
 
 class StockGroupController extends Controller
 {
@@ -31,9 +33,9 @@ class StockGroupController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateStockGroupRequest $request)
     {
-        //
+        info($request->all());
     }
 
     /**

@@ -3,7 +3,6 @@
             class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 ">
-        {{-- <input type="text" id="name" name="name" required="required" class="form-control "> --}}
         {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
         @error('name')
             <div class="error text-danger">{{ $message }}</div>
