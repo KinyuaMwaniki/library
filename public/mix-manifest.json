@@ -60,5 +60,6 @@
     "/js/icheck.js": "/js/icheck.js",
     "/css/vendor-bs-drp-daterangepicker.css": "/css/vendor-bs-drp-daterangepicker.css",
     "/js/inventory.js": "/js/inventory.js",
-    "/js/role.js": "/js/role.js"
+    "/js/role.js": "/js/role.js",
+    "/js/tax.js": "/js/tax.js"
 }

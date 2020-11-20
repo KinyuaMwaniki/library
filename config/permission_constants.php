@@ -19,6 +19,15 @@ return [
             ],
         ],
 
+        'Taxes' => [
+            'Tax Master' => [
+                'create_tax',
+                'read_tax',
+                'update_tax',
+                'delete_tax',
+            ]
+        ],
+
         'Access Control Menu' => [
             'Roles' => [
                 'create_roles',
@@ -32,5 +41,6 @@ return [
         ],
     ]
 ];
+
 
 

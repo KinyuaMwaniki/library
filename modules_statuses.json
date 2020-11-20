@@ -3,5 +3,6 @@
     "Role": true,
     "Inventory": true,
     "Tax": true,
-    "User": true
+    "User": true,
+    "Taxes": true
 }
