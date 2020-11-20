@@ -10,7 +10,13 @@ return [
                 'read_stock_group',
                 'update_stock_group',
                 'delete_stock_group',
-            ]
+            ],
+            'Stock Costing' => [
+                'create_stock_costing',
+                'read_stock_costing',
+                'update_stock_costing',
+                'delete_stock_costing',
+            ],
         ],
 
         'Access Control Menu' => [
@@ -21,11 +27,10 @@ return [
                 'delete_roles',
             ],
             'Permissions' => [
-                'create_permissions',
-                'read_permissions',
                 'update_permissions',
-                'delete_permissions',
             ],
         ],
     ]
 ];
+
+

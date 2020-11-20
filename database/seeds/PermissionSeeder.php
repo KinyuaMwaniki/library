@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
@@ -13,9 +14,10 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {     
-        // TODO: ADD DB transaction in case permissions have error
 
         DB::table('permissions')->delete();   
+
+        Artisan::call('cache:forget spatie.permission.cache');        
 
         $permissions = Config::get('permission_constants.permissions');
         foreach($permissions as $menu => $sub_menus)
@@ -25,6 +27,7 @@ class PermissionSeeder extends Seeder
                 foreach($permissions as $permission)
                 {
                     $perm_check = Permission::where('name', $permission)->first();
+
                     if (!$perm_check) {
                         $permission = Permission::create([
                             'name' => $permission,
@@ -36,7 +39,6 @@ class PermissionSeeder extends Seeder
                 }
             }
         }
-
         
         $role = Role::firstOrCreate(
             ['name' =>  'WizagAdmin'],

@@ -3,12 +3,12 @@
 @section('content')
     <div class="page-title">
         <div class="title_left">
-            <h3>Stock Group</h3>
+            <h3>Stock Costing</h3>
         </div>
         <div class="title_right">
             <div class="col-md-5 col-sm-5  form-group pull-right">
-                @can('create_stock_group')
-                    <a href="{!!  route('stk_group.create') !!}" class="btn btn-primary pull-right" type="button">Add New</a>
+                @can('create_stock_costing')
+                    <a href="{!!  route('stk_costing.create') !!}" class="btn btn-primary pull-right" type="button">Add New</a>
                 @endcan
             </div>
         </div>
@@ -19,29 +19,23 @@
                 <tr>
                     <th>Code</th>
                     <th>Description</th>
-                    <th>Sales Ledger Account</th>
-                    <th>Puchase Ledger Account</th>
-                    <th>Adjustment Ledger Account</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($stock_groups as $stock_group)
+                @foreach ($stock_costings as $stock_costing)
                     <tr>
-                        <td>{{ $stock_group->code }}</td>
-                        <td>{{ $stock_group->description }}</td>
-                        <td>{{ $stock_group->sales_ledger_id }}</td>
-                        <td>{{ $stock_group->purchase_ledger_id }}</td>
-                        <td>{{ $stock_group->adjustment_ledger_id }}</td>
+                        <td>{{ $stock_costing->code }}</td>
+                        <td>{{ $stock_costing->description }}</td>
                         <td class="text-right">
-                            {!! Form::open(['route' => ['stk_group.destroy', $stock_group->group_id], 'method' => 'delete']) !!}
+                            {!! Form::open(['route' => ['stk_costing.destroy', $stock_costing->cost_id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
-                                @can('update_stock_group') 
-                                <a href="{{ route('stk_group.edit', $stock_group->group_id) }}" class='btn btn-default btn-xs'>
+                                @can('update_stock_costing') 
+                                <a href="{{ route('stk_costing.edit', $stock_costing->cost_id) }}" class='btn btn-default btn-xs'>
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </a>
                                 @endcan
-                                @can('delete_stock_group')
+                                @can('delete_stock_costing')
                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'type' => 'submit',
                                 'class' => 'btn btn-danger btn-xs',
@@ -58,14 +52,11 @@
                 <tr>
                     <th>Code</th>
                     <th>Description</th>
-                    <th>Sales Ledger Account</th>
-                    <th>Puchase Ledger Account</th>
-                    <th>Adjustment Ledger Account</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </tfoot>
         </table>
-    </div>
+    </div> 
 @endsection
 
 @section('scripts')

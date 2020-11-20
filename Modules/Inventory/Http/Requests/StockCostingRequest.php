@@ -4,7 +4,7 @@ namespace Modules\Inventory\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateStockGroupRequest extends FormRequest
+class StockCostingRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,10 +15,7 @@ class CreateStockGroupRequest extends FormRequest
     {
         return [
             'code' => 'bail|required|',
-            'sales_ledger_id' => 'bail|required|integer',
-            'purchase_ledger_id' => 'bail|required|integer',
-            'adjustment_ledger_id' => 'bail|required|integer',
-            'description' => 'bail|string|required',
+            'description' => 'bail|required|string',
         ];
     }
 

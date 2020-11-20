@@ -18,7 +18,7 @@ class UpdateStockGroupRequest extends FormRequest
             'sales_ledger_id' => 'bail|required|integer',
             'purchase_ledger_id' => 'bail|required|integer',
             'adjustment_ledger_id' => 'bail|required|integer',
-            'description' => 'bail|string',
+            'description' => 'bail|string|required',
         ];
     }
 

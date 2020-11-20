@@ -1,4 +1,5 @@
 <ul class="nav side-menu">
+    @canany(['read_stock_group', 'read_stock_costing'])
     <li><a><i class="fa fa-barcode"></i> Inventory <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             @can('read_stock_group')
@@ -6,8 +7,15 @@
                     <a href="{!!  route('stk_group.index') !!}">Stock Group</a>
                 </li>
             @endcan
+            @can('read_stock_costing')
+                <li>
+                    <a href="{!!  route('stk_costing.index') !!}">Stock Costing</a>
+                </li>
+            @endcan
         </ul>
     </li>
+    @endcan
+    @canany(['read_roles', 'update_permissions'])
     <li><a><i class="fa fa-unlock"></i> Roles <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             @can('read_roles')
@@ -15,9 +23,12 @@
                     <a href="{!!  route('role.index') !!}">Roles</a>
                 </li>
             @endcan
+            @can('update_permissions')
             <li>
                 <a href="{!!  route('permissions.index') !!}">Permissions</a>
             </li>
+            @endcan
         </ul>
     </li>
+    @endcan
 </ul>
