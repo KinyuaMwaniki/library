@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tax extends Model
 {
-    protected $fillable = [];
+    protected $fillable = [
+        'code',
+        'description',
+        'value',
+        'active',
+    ];
     protected $primaryKey = 'tax_id';
     protected $table = 'taxes';
 }

@@ -21,10 +21,10 @@ return [
 
         'Taxes' => [
             'Tax Master' => [
-                'create_tax',
-                'read_tax',
-                'update_tax',
-                'delete_tax',
+                'create_taxes',
+                'read_taxes',
+                'update_taxes',
+                'delete_taxes',
             ]
         ],
 

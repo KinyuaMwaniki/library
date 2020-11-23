@@ -18,7 +18,7 @@ class CreateTaxesTable extends Migration
             $table->string('code');
             $table->string('description');
             $table->decimal('value');
-            $table->boolean('active');
+            $table->boolean('active')->nullable()->default(0);
             $table->timestamps();
         });
     }

@@ -4,7 +4,11 @@ namespace Modules\Tax\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Tax\Entities\Tax;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
+use Modules\Tax\Http\Requests\TaxRequest;
+use Modules\Tax\Http\Requests\UpdateTaxRequest;
 
 class TaxController extends Controller
 {
@@ -14,7 +18,8 @@ class TaxController extends Controller
      */
     public function index()
     {
-        return view('tax::index');
+        $taxes = Tax::all();
+        return view('tax::taxes.index', compact('taxes'));
     }
 
     /**
@@ -23,7 +28,7 @@ class TaxController extends Controller
      */
     public function create()
     {
-        return view('tax::create');
+        return view('tax::taxes.create');
     }
 
     /**
@@ -31,9 +36,17 @@ class TaxController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(TaxRequest $request)
     {
-        //
+        $tax = Tax::create([
+            'code' => $request->code,
+            'description' => $request->description,
+            'value' => $request->value,
+            'active' => $request->has('active'),
+        ]);
+
+        Session::flash('message', "Tax Saved");
+        return redirect(route('taxes.index'));
     }
 
     /**
@@ -53,7 +66,14 @@ class TaxController extends Controller
      */
     public function edit($id)
     {
-        return view('tax::edit');
+        $tax = Tax::find($id);
+        
+        if (empty($tax)) {
+            Session::flash('message', "Tax Not Found");
+            return redirect(route('taxes.index'));
+        }
+
+        return view('tax::taxes.edit', compact('tax'));
     }
 
     /**
@@ -62,9 +82,24 @@ class TaxController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTaxRequest $request, $id)
     {
-        //
+        $tax = Tax::find($id);
+        
+        if (empty($tax)) {
+            Session::flash('message', "Tax Not Found");
+            return redirect(route('taxes.index'));
+        }
+
+        $tax->update([
+            'code' => $request->code,
+            'description' => $request->description,
+            'value' => $request->value,
+            'active' => $request->has('active'),
+        ]);
+
+        Session::flash('message', "Tax Updated");
+        return redirect(route('taxes.index'));
     }
 
     /**
@@ -74,6 +109,14 @@ class TaxController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tax = Tax::find($id);
+        
+        if (empty($tax)) {
+            Session::flash('message', "Tax Not Found");
+            return redirect(route('taxes.index'));
+        }
+        $tax->delete();
+        Session::flash('message', "Tax Deleted");
+        return redirect(route('taxes.index'));  
     }
 }
