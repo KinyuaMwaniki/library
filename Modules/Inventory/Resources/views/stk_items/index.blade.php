@@ -5,10 +5,14 @@
         <div class="title_left">
             <h3>Inventory</h3>
         </div>
+        
+        {{-- TODO: Add import excel --}}
         <div class="title_right">
-            <div class="col-md-5 col-sm-5  form-group pull-right">
+            <div class="col-md-8 col-sm-8  form-group pull-right">
                 @can('create_inventories')
-                    <a href="{!!  route('inventories.create') !!}" class="btn btn-primary pull-right" type="button">Add New</a>
+                <a href="{!!  route('inventories.create') !!}" class="btn btn-sm btn-info pull-right" type="button">Add New</a>
+                    <a href="{!!  route('inventories.import-csv') !!}" target="_blank" class="btn btn-sm btn-info pull-right mr-3" type="button"><i class="fa fa-upload"></i> Import</a>
+                    <a href="/storage/templates/inventory_import_template.csv" class="btn btn-sm btn-info pull-right mr-3" type="button"><i class="fa fa-download"></i> Template</a>
                 @endcan
             </div>
         </div>

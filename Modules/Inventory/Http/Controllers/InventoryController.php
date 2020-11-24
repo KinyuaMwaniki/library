@@ -118,4 +118,9 @@ class InventoryController extends Controller
         Session::flash('message', "Stock Item Deleted");
         return redirect(route('inventories.index')); 
     }
+
+    public function importCsv()
+    {
+        
+    }
 }

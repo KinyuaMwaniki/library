@@ -8,7 +8,7 @@
         <div class="title_right">
             <div class="col-md-5 col-sm-5  form-group pull-right">
                 @can('create_stock_group')
-                    <a href="{!!  route('stk_group.create') !!}" class="btn btn-primary pull-right" type="button">Add New</a>
+                    <a href="{!!  route('stk_group.create') !!}" class="btn btn-sm btn-info pull-right" type="button">Add New</a>
                 @endcan
             </div>
         </div>

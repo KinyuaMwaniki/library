@@ -21,7 +21,7 @@
     </li>
     @endcan
     @canany(['read_taxes'])
-    <li><a><i class="fa fa-tumblr"></i> Taxes <span class="fa fa-chevron-down"></span></a>
+    <li><a><i class="fa fa-tumblr"></i>Taxes<span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             @can('read_taxes')
             <li>

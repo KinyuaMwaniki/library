@@ -83,7 +83,7 @@
               <div class="form-group">
                 <button
                   type="button"
-                  class="btn btn-primary pull-right"
+                  class="btn btn-info pull-right"
                   @click="submitData"
                 >
                   Submit

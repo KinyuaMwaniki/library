@@ -13,6 +13,6 @@
 <div class="item form-group">
     <div class="col-md-6 col-sm-6 offset-md-2 text-right">
         <button type="submit" class="btn btn-success">Submit</button>
-        <a href="{{ route('role.index') }}" class="btn btn-primary">Cancel</a>
+        <a href="{{ route('role.index') }}" class="btn btn-info">Cancel</a>
     </div>
 </div>
