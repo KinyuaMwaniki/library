@@ -2,6 +2,11 @@
     @canany(['read_stock_group', 'read_stock_costing'])
     <li><a><i class="fa fa-barcode"></i> Inventory <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
+            @can('read_inventories')
+                <li>
+                    <a href="{!!  route('inventories.index') !!}">Inventory</a>
+                </li>
+            @endcan
             @can('read_stock_group')
                 <li>
                     <a href="{!!  route('stk_group.index') !!}">Stock Group</a>
@@ -11,6 +16,17 @@
                 <li>
                     <a href="{!!  route('stk_costing.index') !!}">Stock Costing</a>
                 </li>
+            @endcan
+        </ul>
+    </li>
+    @endcan
+    @canany(['read_taxes'])
+    <li><a><i class="fa fa-tumblr"></i> Taxes <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+            @can('read_taxes')
+            <li>
+                <a href="{!!  route('taxes.index') !!}">Taxes Master</a>
+            </li>
             @endcan
         </ul>
     </li>
@@ -27,17 +43,6 @@
             <li>
                 <a href="{!!  route('permissions.index') !!}">Permissions</a>
             </li>
-            @endcan
-        </ul>
-    </li>
-    @endcan
-    @canany(['read_taxes'])
-    <li><a><i class="fa fa-tumblr"></i> Taxes <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-            @can('read_taxes')
-                <li>
-                    <a href="{!!  route('taxes.index') !!}">Taxes Master</a>
-                </li>
             @endcan
         </ul>
     </li>

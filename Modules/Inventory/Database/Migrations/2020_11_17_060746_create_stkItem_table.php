@@ -14,6 +14,7 @@ class CreateStkItemTable extends Migration
     public function up()
     {
         Schema::create('stkItem', function (Blueprint $table) {
+
             $table->bigIncrements('StockLink');
             $table->string('Code');
             $table->string('Description');
@@ -33,26 +34,26 @@ class CreateStkItemTable extends Migration
             $table->float('HighestCost');
             $table->float('StandardCost');
             $table->float('QtyOnHand');
-            $table->boolean('ServiceItem');
-            $table->boolean('ItemActive');
-            $table->boolean('WhseItem');
-            $table->boolean('SerialItem');
-            $table->boolean('AllowDupeSerial');
-            $table->boolean('AllowStrictSerial');
-            $table->boolean('BOMItem');
-            $table->boolean('bCommissionItem');
-            $table->boolean('bLotItem');
+            $table->boolean('ServiceItem')->default(0);
+            $table->boolean('ItemActive')->default(0);
+            $table->boolean('WhseItem')->default(0);
+            $table->boolean('SerialItem')->default(0);
+            $table->boolean('AllowDupeSerial')->default(0);
+            $table->boolean('AllowStrictSerial')->default(0);
+            $table->boolean('BOMItem')->default(0);
+            $table->boolean('bCommissionItem')->default(0);
+            $table->boolean('bLotItem')->default(0);
             $table->string('Make');
             $table->string('Model');
             $table->string('Type');
             $table->string('Color');
-            $table->integer('itemCostingMethod');
+            $table->integer('iItemCostingMethod');
             $table->float('fItemLastGRVCost');
             $table->float('fNetMass');
             $table->integer('iUOMStockingUnitID');
             $table->integer('iUOMPurchaseUnitID');
             $table->integer('iUOMDSaleUnitID');
-            $table->boolean('bAllowNegStock');
+            $table->boolean('bAllowNegStock')->default(0);
             $table->float('StkItem_fLeadDays');
             $table->float('fBuyLength');
             $table->float('fBuyWidth');
@@ -68,8 +69,8 @@ class CreateStkItemTable extends Migration
             $table->float('fSellVolume');
             $table->float('cSellWeight');
             $table->string('cSellUnit');
-            $table->boolean('bUOMItem');
-            $table->boolean('bDimensionItem');
+            $table->boolean('bUOMItem')->default(0);
+            $table->boolean('bDimensionItem')->default(0);
             $table->timestamps();
 
             $table->foreign('ItemGroup')->references('group_id')->on('stkGroup')->onDelete('cascade');;

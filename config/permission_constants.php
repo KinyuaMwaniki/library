@@ -4,7 +4,13 @@
 
 return [
     'permissions' => [        
-        'Inventory' => [
+        'Inventory Menu' => [
+            'Inventory' => [
+                'create_inventories',
+                'read_inventories',
+                'update_inventories',
+                'delete_inventories',
+            ],
             'Stock Group' => [
                 'create_stock_group',
                 'read_stock_group',
@@ -19,7 +25,7 @@ return [
             ],
         ],
 
-        'Taxes' => [
+        'Taxes Menu' => [
             'Tax Master' => [
                 'create_taxes',
                 'read_taxes',

@@ -115,6 +115,7 @@ class TaxController extends Controller
             Session::flash('message', "Tax Not Found");
             return redirect(route('taxes.index'));
         }
+
         $tax->delete();
         Session::flash('message', "Tax Deleted");
         return redirect(route('taxes.index'));  

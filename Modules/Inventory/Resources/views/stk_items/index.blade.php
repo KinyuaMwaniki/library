@@ -3,12 +3,12 @@
 @section('content')
     <div class="page-title">
         <div class="title_left">
-            <h3>Taxes</h3>
+            <h3>Inventory</h3>
         </div>
         <div class="title_right">
             <div class="col-md-5 col-sm-5  form-group pull-right">
-                @can('create_taxes')
-                    <a href="{!!  route('taxes.create') !!}" class="btn btn-primary pull-right" type="button">Add New</a>
+                @can('create_inventories')
+                    <a href="{!!  route('inventories.create') !!}" class="btn btn-primary pull-right" type="button">Add New</a>
                 @endcan
             </div>
         </div>
@@ -19,27 +19,31 @@
                 <tr>
                     <th>Code</th>
                     <th>Description</th>
-                    <th>Value</th>
+                    <th>Item Group</th>
+                    <th>Reorder Level</th>
+                    <th>Quantity on hand</th>
                     <th>Active</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($taxes as $tax)
+                @foreach ($stk_items as $stk_item)
                     <tr>
-                        <td>{{ $tax->code }}</td>
-                        <td>{{ $tax->description }}</td>
-                        <td>{{ $tax->value }} %</td>
-                        <td>{{ $tax->active }}</td>
+                        <td>{{ $stk_item->Code }}</td>
+                        <td>{{ $stk_item->Description }}</td>
+                        <td>{{ $stk_item->stockGroup->description }}</td>
+                        <td>{{ $stk_item->Re_Ord_Lvl }}</td>
+                        <td>{{ $stk_item->QtyOnHand }}</td>
+                        <td>{{ $stk_item->ItemActive == 1 ? 'Yes' : 'No' }}</td>
                         <td class="text-right">
-                            {!! Form::open(['route' => ['taxes.destroy', $tax->tax_id], 'method' => 'delete']) !!}
+                            {!! Form::open(['route' => ['inventories.destroy', $stk_item->StockLink], 'method' => 'delete']) !!}
                             <div class='btn-group'>
-                                @can('update_taxes') 
-                                <a href="{{ route('taxes.edit', $tax->tax_id) }}" class='btn btn-default btn-xs'>
+                                @can('update_inventories') 
+                                <a href="{{ route('inventories.edit', $stk_item->StockLink) }}" class='btn btn-default btn-xs'>
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </a>
                                 @endcan
-                                @can('delete_taxes')
+                                @can('delete_inventories')
                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'type' => 'submit',
                                 'class' => 'btn btn-danger btn-xs',
@@ -56,7 +60,9 @@
                 <tr>
                     <th>Code</th>
                     <th>Description</th>
-                    <th>Value</th>
+                    <th>Item Group</th>
+                    <th>Reorder Level</th>
+                    <th>Quantity on hand</th>
                     <th>Active</th>
                     <th class="text-right">Actions</th>
                 </tr>
@@ -78,12 +84,10 @@
                 {
                     extend: 'colvis',
                     columns: ':not(.noVis)',
-
                 }
             ],
             colReorder: true,
         });
     });
-
 </script>
 @endsection

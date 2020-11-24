@@ -4,7 +4,13 @@ namespace Modules\Inventory\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Tax\Entities\Tax;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
+use Modules\Inventory\Entities\StkItem;
+use Modules\Inventory\Entities\StkGroup;
+use Modules\Inventory\Entities\StkCosting;
+use Modules\Inventory\Http\Requests\CreateInventoryRequest;
 
 class InventoryController extends Controller
 {
@@ -14,7 +20,8 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        return view('inventory::index');
+        $stk_items = StkItem::all();
+        return view('inventory::stk_items.index', compact('stk_items'));
     }
 
     /**
@@ -23,7 +30,11 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        return view('inventory::create');
+        $stock_costings = StkCosting::pluck('description', 'cost_id');
+        $stock_groups = StkGroup::pluck('description', 'group_id');
+        // TODO: Show only active taxes
+        $taxes = Tax::pluck('description', 'tax_id');
+        return view('inventory::stk_items.create', compact('stock_costings', 'stock_groups', 'taxes'));
     }
 
     /**
@@ -31,9 +42,11 @@ class InventoryController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateInventoryRequest $request)
     {
-        //
+        $stk_item = StkItem::create($request->all());
+        Session::flash('message', "Inventory Item Saved");
+        return redirect(route('inventories.index'));
     }
 
     /**
@@ -53,7 +66,17 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        return view('inventory::edit');
+        $stk_item = StkItem::find($id);
+        
+        if (empty($stk_item)) {
+            Session::flash('message', "Stock Item Not Found");
+            return redirect(route('inventories.index'));
+        }
+        $stock_costings = StkCosting::pluck('description', 'cost_id');
+        $stock_groups = StkGroup::pluck('description', 'group_id');
+        // TODO: Show only active taxes
+        $taxes = Tax::pluck('description', 'tax_id');
+        return view('inventory::stk_items.edit', compact('stk_item', 'stock_costings', 'stock_groups', 'taxes'));
     }
 
     /**
@@ -62,9 +85,19 @@ class InventoryController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateInventoryRequest $request, $id)
     {
-        //
+        $stk_item = StkItem::find($id);
+        
+        if (empty($stk_item)) {
+            Session::flash('message', "Stock Item Not Found");
+            return redirect(route('inventories.index'));
+        }
+
+        $stk_item->update($request->all());
+
+        Session::flash('message', "Inventory Item updated");
+        return redirect(route('inventories.index'));
     }
 
     /**
@@ -74,6 +107,15 @@ class InventoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $stk_item = StkItem::find($id);
+        
+        if (empty($stk_item)) {
+            Session::flash('message', "Stock Item Not Found");
+            return redirect(route('inventories.index'));
+        }
+
+        $stk_item->delete();
+        Session::flash('message', "Stock Item Deleted");
+        return redirect(route('inventories.index')); 
     }
 }
