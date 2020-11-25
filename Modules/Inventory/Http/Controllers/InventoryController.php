@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Tax\Entities\Tax;
 use Illuminate\Routing\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session;
 use Modules\Inventory\Entities\StkItem;
 use Modules\Inventory\Entities\StkGroup;
 use Modules\Inventory\Entities\StkCosting;
+use Modules\Inventory\Imports\StockItemImport;
 use Modules\Inventory\Http\Requests\CreateInventoryRequest;
 
 class InventoryController extends Controller
@@ -119,8 +121,23 @@ class InventoryController extends Controller
         return redirect(route('inventories.index')); 
     }
 
-    public function importCsv()
+    public function importCsv(Request $request)
     {
-        
+        ini_set('max_execution_time', 4800);
+        ini_set('memory_limit', '256M');
+
+        // $this->validate($request, [
+        //     'inventory_imports' => 'required',
+        // ]);
+
+        $request->validate([
+            'inventory_imports' => 'required',
+        ]);
+
+        $file = $request->file('inventory_imports');
+
+        Excel::import(new StockItemImport, $file);
+        Session::flash('message', "Stock Item Imported");
+        return redirect(route('inventories.index'));
     }
 }

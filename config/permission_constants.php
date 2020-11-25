@@ -1,6 +1,6 @@
 <?php
 
-// Add menus, submenus, and their permissions
+// Add menus, submenus, and their permissions and then run seeder
 
 return [
     'permissions' => [        

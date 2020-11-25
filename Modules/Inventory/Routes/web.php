@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/inventories/{inventory}/edit', 'InventoryController@edit')->name('inventories.edit')->permission('update_inventories');
     Route::patch('/inventories/{inventory}', 'InventoryController@update')->name('inventories.update')->permission('update_inventories');
     Route::delete('/inventories/{inventory}', 'InventoryController@destroy')->name('inventories.destroy')->permission('delete_inventories');
-    Route::get('/inventories/upload-csv', 'InventoryController@importCsv')->name('inventories.import-csv')->permission('create_inventories');
+    Route::post('/inventories/upload-csv', 'InventoryController@importCsv')->name('inventories.import-csv')->permission('create_inventories');
  
     // Stock group
     Route::get('/stk_group', 'StockGroupController@index')->name('stk_group.index')->permission('read_stock_group');
