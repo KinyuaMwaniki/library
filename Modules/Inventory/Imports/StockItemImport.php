@@ -2,25 +2,38 @@
 
 namespace Modules\Inventory\Imports;
 
+use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Modules\Inventory\Entities\StkItem;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Concerns\OnEachRow;
+use Modules\Inventory\Entities\StkCosting;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 HeadingRowFormatter::default('none');
 
-class StockItemImport implements ToModel, WithHeadingRow
+class StockItemImport implements WithHeadingRow, OnEachRow
 {
 
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    public function onRow(Row $row)
     {
-        info("Hello");
+        
+        $row = $row->toArray();
 
-        return new StkItem([
+        // TODO: add validation and create stockgroup, taxes, and stockcosting
+
+        // $validator = Validator::make($row, [
+        //     'Code' => 'required',
+        //     'Description' => 'required',
+        // ])->validate();
+
+        // $stk_costing = StkCosting::create([
+        //     'code' => $request->code,
+        //     'description' => $request->description,
+        // ]);
+
+        $stk_item = StkItem::create([
             'Code' => $row['Code'],
             'Description' => $row['Description'],
             'ItemGroup' => $row['ItemGroup'],
@@ -77,5 +90,10 @@ class StockItemImport implements ToModel, WithHeadingRow
             'bUOMItem' => $row['bUOMItem'],
             'bDimensionItem' => $row['bDimensionItem'],
         ]);
+    }
+
+    public function rules(): array
+    {
+
     }
 }

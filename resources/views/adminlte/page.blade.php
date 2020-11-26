@@ -31,7 +31,21 @@
                 @if(Session::has('error'))
                     <p class="alert alert-danger alert-clearfix">{{ Session::get('error') }}</p>
                 @endif
+                @if (isset($failures))
+   <div class="alert alert-danger" role="alert">
+      <strong>Errors:</strong>
+      
+      <ul>
+         @foreach ($failures as $failure)
+            @foreach ($failure->errors() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+         @endforeach
+      </ul>
+   </div>
+@endif
                 @yield('content')
+                
             </div>
             
             <footer>

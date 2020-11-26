@@ -125,18 +125,26 @@ class InventoryController extends Controller
     {
         ini_set('max_execution_time', 4800);
         ini_set('memory_limit', '256M');
+        if (!$request->hasFile('inventory_imports')) {
+            Session::flash('error', "Please select a file to upload");
+            return redirect()->back();  
+        }
 
-        // $this->validate($request, [
-        //     'inventory_imports' => 'required',
-        // ]);
-
-        $request->validate([
-            'inventory_imports' => 'required',
-        ]);
-
+        
         $file = $request->file('inventory_imports');
 
-        Excel::import(new StockItemImport, $file);
+        try
+        {
+            Excel::import(new StockItemImport, $file);
+        }
+        catch(\Exception $ex)
+        {
+            return back()->withError('Not imported, please make sure data is properly formatted');
+        }
+        catch(\Error $ex)
+        {
+            return back()->withError('Not imported, please make sure data is properly formatted');
+        }
         Session::flash('message', "Stock Item Imported");
         return redirect(route('inventories.index'));
     }

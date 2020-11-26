@@ -6,7 +6,6 @@
             <h3>Inventory</h3>
         </div>
 
-        {{-- TODO: Add import excel --}}
         <div class="title_right">
             <div class="col-md-12 col-sm-12  form-group pull-right">
                 @can('create_inventories')
