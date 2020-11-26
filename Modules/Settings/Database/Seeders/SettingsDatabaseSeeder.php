@@ -39,6 +39,7 @@ class SettingsDatabaseSeeder extends Seeder
                     'created_at' => $now,
                     'updated_at' => $now
                 ],
+                
                 [
                     'model_id' => StkItem::MODEL_ID,
                     'policy' => StkItem::AUTOMATIC_NUMBERING,
@@ -55,7 +56,7 @@ class SettingsDatabaseSeeder extends Seeder
                 [
                     'model_id' => StkGroup::MODEL_ID,
                     'policy' => StkGroup::NUMBERING_FORMAT_TEST,
-                    'value' => 'false',
+                    'value' => '4',
                     'postfix' => '',
                     'second_value' => '',
                     'exceptions' => '',

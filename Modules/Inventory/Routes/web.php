@@ -40,4 +40,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/stk_costing/{stk_costing}/edit', 'StockCostingController@edit')->name('stk_costing.edit')->permission('update_stock_costing');
     Route::patch('/stk_costing/{stk_costing}', 'StockCostingController@update')->name('stk_costing.update')->permission('update_stock_costing');
     Route::delete('/stk_costing/{stk_costing}', 'StockCostingController@destroy')->name('stk_costing.destroy')->permission('delete_stock_costing');
+
 });

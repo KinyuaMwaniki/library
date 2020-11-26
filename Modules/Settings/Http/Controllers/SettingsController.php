@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Settings\Entities\Setting;
+use Illuminate\Support\Facades\Session;
+use Modules\Inventory\Entities\StkItem;
 
 class SettingsController extends Controller
 {
@@ -16,31 +18,8 @@ class SettingsController extends Controller
     public function index()
     {
         $settings = Setting::with(['model'])->orderBy('model_id')->get();
-
-        // return $settings;
-
         $headers = $settings->unique('model_id');
-
         return view('settings::settings.index', compact('settings', 'headers'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('settings::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -60,7 +39,14 @@ class SettingsController extends Controller
      */
     public function edit($id)
     {
-        return view('settings::edit');
+        $setting = Setting::find($id);
+        
+        if (empty($setting)) {
+            Session::flash('message', "Setting Not Found");
+            return redirect(route('settings.index'));
+        }
+
+        return view('settings::settings.edit', compact('setting'));
     }
 
     /**
@@ -71,16 +57,17 @@ class SettingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $setting = Setting::find($id);
+        
+        if (empty($setting)) {
+            Session::flash('message', "Setting Not Found");
+            return redirect(route('settings.index'));
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        $setting->fill($request->only(['value']));
+        $setting->save(); 
+
+        Session::flash('message', "Setting updated");
+        return redirect(route('settings.index'));
     }
 }

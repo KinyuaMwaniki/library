@@ -44,6 +44,13 @@ return [
             'Permissions' => [
                 'update_permissions',
             ],
+            'Inventory Code Numbers' => [
+                'read_code_numbers',
+                'create_code_numbers',
+                'read_code_numbers',
+                'update_code_numbers',
+                'delete_code_numbers',
+            ],
             'System Settings' => [
                 'read_settings',
                 'create_settings',
@@ -51,10 +58,10 @@ return [
                 'update_settings',
                 'delete_settings',
             ],
-
         ],
     ]
 ];
+
 
 
 

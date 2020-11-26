@@ -44,7 +44,12 @@
             <a href="{!!  route('permissions.index') !!}">Permissions</a>
         </li>
     @endcan
-    @can('read_settings')
+    @can('read_code_numbers')
+        <li>
+            <a href="{!!  route('code_numbers.index') !!}">Code Numbering</a>
+        </li>
+    @endcan
+    @can('read_code_numbers')
         <li>
             <a href="{!!  route('settings.index') !!}">System Settings</a>
         </li>
