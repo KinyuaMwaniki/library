@@ -4,5 +4,6 @@
     "Inventory": true,
     "Tax": true,
     "User": true,
-    "Taxes": true
+    "Taxes": true,
+    "Settings": true
 }

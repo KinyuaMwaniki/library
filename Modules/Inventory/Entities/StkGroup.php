@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class StkGroup extends Model
 {
+    
+    const MODULE_ID = 1;
+
     protected $fillable = [
         'code',
         'sales_ledger_id',
