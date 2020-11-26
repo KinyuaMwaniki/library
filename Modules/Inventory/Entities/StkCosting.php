@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class StkCosting extends Model
 {
     
-    const MODULE_ID = 1;
+    const MODEL_ID = 2;
 
     protected $fillable = [
         'code',

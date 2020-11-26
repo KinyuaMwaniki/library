@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class StkGroup extends Model
 {
     
-    const MODULE_ID = 1;
+    const MODEL_ID = 3;
+    const NUMBERING_FORMAT_TEST = 'NUMBERING FORMAT TEST';
+    const AUTOMATIC_NUMBERING_TEST = 'AUTOMATIC NUMBERING TEST';
 
     protected $fillable = [
         'code',

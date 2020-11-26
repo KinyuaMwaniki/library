@@ -5,6 +5,7 @@ namespace Modules\Settings\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Settings\Entities\Setting;
 
 class SettingsController extends Controller
 {
@@ -14,7 +15,13 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('settings::index');
+        $settings = Setting::with(['model'])->orderBy('model_id')->get();
+
+        // return $settings;
+
+        $headers = $settings->unique('model_id');
+
+        return view('settings::settings.index', compact('settings', 'headers'));
     }
 
     /**

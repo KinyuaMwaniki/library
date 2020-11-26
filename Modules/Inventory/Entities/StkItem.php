@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class StkItem extends Model
 {
 
-    const MODULE_ID = 1;
-
+    const MODEL_ID = 1;
+    const NUMBERING_FORMAT = 'NUMBERING FORMAT';
+    const AUTOMATIC_NUMBERING = 'AUTOMATIC NUMBERING';
+    
     protected $fillable = [
         'StockLink',
         'Code',

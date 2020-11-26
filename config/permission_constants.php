@@ -34,8 +34,8 @@ return [
             ]
         ],
 
-        'Access Control Menu' => [
-            'Roles' => [
+        'Settings Menu' => [
+            'User Roles' => [
                 'create_roles',
                 'read_roles',
                 'update_roles',
@@ -44,9 +44,20 @@ return [
             'Permissions' => [
                 'update_permissions',
             ],
+            'System Settings' => [
+                'read_settings',
+                'create_settings',
+                'read_settings',
+                'update_settings',
+                'delete_settings',
+            ],
+
         ],
     ]
 ];
+
+
+
 
 
 

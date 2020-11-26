@@ -19,32 +19,37 @@
             @endcan
         </ul>
     </li>
-    @endcan
-    @canany(['read_taxes'])
-    <li><a><i class="fa fa-tumblr"></i>Taxes<span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-            @can('read_taxes')
+@endcan
+@canany(['read_taxes'])
+<li><a><i class="fa fa-tumblr"></i>Taxes<span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu">
+        @can('read_taxes')
             <li>
                 <a href="{!!  route('taxes.index') !!}">Taxes Master</a>
             </li>
-            @endcan
-        </ul>
-    </li>
+        @endcan
+    </ul>
+</li>
+@endcan
+@canany(['read_roles', 'update_permissions', 'read_settings'])
+<li><a><i class="fa fa-unlock"></i> Settings <span class="fa fa-chevron-down"></span></a>
+<ul class="nav child_menu">
+    @can('read_roles')
+        <li>
+            <a href="{!!  route('role.index') !!}">Roles</a>
+        </li>
     @endcan
-    @canany(['read_roles', 'update_permissions'])
-    <li><a><i class="fa fa-unlock"></i> Roles <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-            @can('read_roles')
-                <li>
-                    <a href="{!!  route('role.index') !!}">Roles</a>
-                </li>
-            @endcan
-            @can('update_permissions')
-            <li>
-                <a href="{!!  route('permissions.index') !!}">Permissions</a>
-            </li>
-            @endcan
-        </ul>
-    </li>
+    @can('update_permissions')
+        <li>
+            <a href="{!!  route('permissions.index') !!}">Permissions</a>
+        </li>
     @endcan
+    @can('read_settings')
+        <li>
+            <a href="{!!  route('settings.index') !!}">System Settings</a>
+        </li>
+    @endcan
+</ul>
+</li>
+@endcan
 </ul>
