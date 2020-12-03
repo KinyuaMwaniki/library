@@ -7,6 +7,8 @@
 - npm run dev
 - cp .env.example .env
 - php artisan key:generate
+- Create db
+- php artisan migrate --seed
 
 ## Default User
 U:admin@wizag.biz
