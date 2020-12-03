@@ -1,7 +1,7 @@
 ## Installation
 
-- git clone https://github.com/KinyuaMwaniki/wiz-erp-felix.git
-- cd wiz-erp-felix\
+- git clone https://github.com/KinyuaMwaniki/tracking.git
+- cd tracking
 - composer install --ignore-platform-reqs
 - npm install
 - npm run dev
