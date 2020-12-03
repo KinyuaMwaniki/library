@@ -18,6 +18,5 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(ModelsTableSeeder::class);
         $this->call(SettingsDatabaseSeeder::class);
-        $this->call(CodeNumbersTableSeeder::class);
     }
 }

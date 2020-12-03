@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Role\Http\Requests;
+namespace Modules\User\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRoleRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,8 +14,8 @@ class StoreRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|unique:roles',
-            'guard_name' => 'bail|required'
+            'name' =>'bail|required|string',
+            'email' =>'bail|required|unique:users|email',
         ];
     }
 

@@ -22,12 +22,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/settings/{setting}', 'SettingsController@update')->name('settings.update')->permission('update_settings');
     Route::delete('/settings/{setting}', 'SettingsController@destroy')->name('settings.destroy')->permission('delete_settings');
 
-    // Item numbering
-    Route::get('/code-numbers', 'CodeNumbersController@index')->name('code_numbers.index')->permission('read_code_numbers');
-    Route::get('/code-numbers/create', 'CodeNumbersController@create')->name('code_numbers.create')->permission('create_code_numbers');
-    Route::post('/code-numbers', 'CodeNumbersController@store')->name('code_numbers.store')->permission('create_code_numbers');
-    Route::get('/code-numbers/{code_number}', 'CodeNumbersController@show')->name('code_numbers.show')->permission('read_code_numbers');
-    Route::get('/code-numbers/{code_number}/edit', 'CodeNumbersController@edit')->name('code_numbers.edit')->permission('update_code_numbers');
-    Route::patch('/code-numbers/{code_number}', 'CodeNumbersController@update')->name('code_numbers.update')->permission('update_code_numbers');
-    Route::delete('/code-numbers/{code_number}', 'CodeNumbersController@destroy')->name('code_numbers.destroy')->permission('delete_code_numbers');
 });

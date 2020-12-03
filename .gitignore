@@ -12,7 +12,5 @@ npm-debug.log
 yarn-error.log
 /Modules/Role/node_modules
 /Modules/User/node_modules
-/Modules/Inventory/node_modules
 /Modules/Tax/node_modules
-commands.txt
-/storage/framework/laravel-excel
+/Modules/Inventory/node_modules

@@ -28,27 +28,7 @@ class ModelsTableSeeder extends Seeder
         
         DB::table('models')->insert(
             [
-                [
-                    'id' => StkItem::MODEL_ID,
-                    'name' => 'Stock Item',
-                    'description' => 'This module deals with stock items creation',
-                    'created_at' => $now,
-                    'updated_at' => $now
-                ],
-                [
-                    'id' => StkCosting::MODEL_ID,
-                    'name' => 'Stock Costing',
-                    'description' => 'This module deals with inventory costing methods',
-                    'created_at' => $now,
-                    'updated_at' => $now
-                ],
-                [
-                    'id' => StkGroup::MODEL_ID,
-                    'name' => 'Stock Group',
-                    'description' => 'This module deals with inventory groups',
-                    'created_at' => $now,
-                    'updated_at' => $now
-                ],
+            
             ]
         );
     }

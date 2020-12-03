@@ -4,38 +4,14 @@
 
 return [
     'permissions' => [        
-        'Inventory Menu' => [
-            'Inventory' => [
-                'create_inventories',
-                'read_inventories',
-                'update_inventories',
-                'delete_inventories',
-            ],
-            'Stock Group' => [
-                'create_stock_group',
-                'read_stock_group',
-                'update_stock_group',
-                'delete_stock_group',
-            ],
-            'Stock Costing' => [
-                'create_stock_costing',
-                'read_stock_costing',
-                'update_stock_costing',
-                'delete_stock_costing',
-            ],
-        ],
-
-        'Taxes Menu' => [
-            'Tax Master' => [
-                'create_taxes',
-                'read_taxes',
-                'update_taxes',
-                'delete_taxes',
-            ]
-        ],
-
         'Settings Menu' => [
-            'User Roles' => [
+            'Users' => [
+                'create_users',
+                'read_users',
+                'update_users',
+                'delete_users',
+            ],
+            'Roles' => [
                 'create_roles',
                 'read_roles',
                 'update_roles',
@@ -43,13 +19,6 @@ return [
             ],
             'Permissions' => [
                 'update_permissions',
-            ],
-            'Inventory Code Numbers' => [
-                'read_code_numbers',
-                'create_code_numbers',
-                'read_code_numbers',
-                'update_code_numbers',
-                'delete_code_numbers',
             ],
             'System Settings' => [
                 'read_settings',
