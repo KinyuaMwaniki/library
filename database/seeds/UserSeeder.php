@@ -13,29 +13,29 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::where('email', 'admin@wizag.biz')->first();
+        $user = User::where('email', 'admin@library.biz')->first();
         if (!$user) {             
                 $user = User::create([
                     'name' => 'Administrator',
-                    'email' => 'admin@wizag.biz',
-                    'password' => Hash::make('password'),
+                    'email' => 'admin@library.biz',
+                    'password' => Hash::make('secret'),
                     ]);
         }
         else
         {
-            $this->command->info('admin@wizag.biz already exists');
+            $this->command->info('admin@library.biz already exists');
         }
 
         $role = Role::firstOrCreate(
-            ['name' =>  'WizagAdmin'],
-            ['name' => 'WizagAdmin']
+            ['name' =>  'Administrator'],
+            ['name' => 'Administrator']
         );
 
 
 
         if(!$user->hasRole($role))
         {
-            $user->assignRole('WizagAdmin');
+            $user->assignRole('Administrator');
         }
 
     }

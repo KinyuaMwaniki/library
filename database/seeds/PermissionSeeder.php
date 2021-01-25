@@ -41,8 +41,8 @@ class PermissionSeeder extends Seeder
         }
         
         $role = Role::firstOrCreate(
-            ['name' =>  'WizagAdmin'],
-            ['name' => 'WizagAdmin']
+            ['name' =>  'Administrator'],
+            ['name' => 'Administrator']
         );
 
         $role->givePermissionTo(Permission::where('guard_name', 'web')->get());
