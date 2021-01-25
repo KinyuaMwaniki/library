@@ -1,4 +1,11 @@
 <ul class="nav side-menu">
+    @canany(['read_students'])
+        <li>
+            <a href="{!!  route('students.index') !!}"><i class="fa fa-users"></i>Students</a>
+        </li>
+    @endcan
+</ul>
+<ul class="nav side-menu">
     @canany(['read_roles', 'update_permissions', 'read_settings', 'read_users'])
         <li><a><i class="fa fa-unlock"></i> Settings <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">

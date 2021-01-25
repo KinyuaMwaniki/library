@@ -28,6 +28,14 @@ return [
                 'delete_settings',
             ],
         ],
+        'Students Menu' => [
+            'Students' => [
+                'read_students',
+                'create_students',
+                'update_students',
+                'delete_students',
+            ]
+        ]
     ]
 ];
 
