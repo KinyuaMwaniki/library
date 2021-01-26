@@ -3,13 +3,13 @@
 @section('content')
     <div class="page-title row">
         <div class="title_left  ml-4">
-            <h3>Edit User</h3>
+            <h3>Edit Student</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 ">
-            {!! Form::model($user, ['route' => ['user.update', $user->id], 'method' => 'patch']) !!}
-                @include('user::users.fields')
+            {!! Form::model($student, ['route' => ['students.update', $student->id], 'method' => 'patch']) !!}
+                @include('students::students.fields')
             {!! Form::close() !!}
         </div>
     </div>

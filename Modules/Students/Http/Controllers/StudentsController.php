@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Students\Entities\Student;
+use Illuminate\Support\Facades\Session;
+use Modules\Students\Http\Requests\CreateStudentRequest;
 
 class StudentsController extends Controller
 {
@@ -25,7 +27,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        return view('students::create');
+        return view('students::students.create');
     }
 
     /**
@@ -33,9 +35,17 @@ class StudentsController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateStudentRequest $request)
     {
-        //
+        $student = Student::create([
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'student_number' => $request->student_number,
+        ]);
+
+        Session::flash('message', "Student Saved");
+        return redirect(route('students.index'));
     }
 
     /**
@@ -55,7 +65,14 @@ class StudentsController extends Controller
      */
     public function edit($id)
     {
-        return view('students::edit');
+        $student = Student::find($id);
+        
+        if (empty($student)) {
+            Session::flash('message', "Student Not Found");
+            return redirect(route('students.index'));
+        }
+
+        return view('students::students.edit', compact('student'));
     }
 
     /**
@@ -66,7 +83,22 @@ class StudentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student = Student::find($id);
+        
+        if (empty($student)) {
+            Session::flash('message', "Student Not Found");
+            return redirect(route('students.index'));
+        }
+
+        $student->update([
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'student_number' => $request->student_number,
+        ]);
+
+        Session::flash('message', "Student Updated");
+        return redirect(route('students.index'));
     }
 
     /**
@@ -76,6 +108,15 @@ class StudentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        
+        if (empty($student)) {
+            Session::flash('message', "Student Not Found");
+            return redirect(route('students.index'));
+        }
+
+        $student->delete();
+        Session::flash('message', "Student Deleted");
+        return redirect(route('students.index'));  
     }
 }
