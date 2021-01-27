@@ -1,0 +1,1 @@
+Vue.component('book-create', require('./components/books/CreateBook.vue').default);
