@@ -1,12 +1,9 @@
 <?php
 
-namespace Modules\Students\Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use Modules\Students\Entities\Student;
-use Illuminate\Database\Eloquent\Model;
 
-class StudentsDatabaseSeeder extends Seeder
+class StudentsSeeder extends Seeder
 {
     /**
      * Run the database seeds.

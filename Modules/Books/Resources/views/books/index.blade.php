@@ -3,12 +3,12 @@
 @section('content')
     <div class="page-title">
         <div class="title_left">
-            <h3>Students</h3>
+            <h3>Books</h3>
         </div>
         <div class="title_right">
             <div class="col-md-5 col-sm-5  form-group pull-right">
-                @can('create_students')
-                    <a href="{!!  route('students.create') !!}" class="btn btn-info pull-right" type="button">Add New</a>
+                @can('create_books')
+                    <a href="{!!  route('books.create') !!}" class="btn btn-info pull-right" type="button">Add New</a>
                 @endcan
             </div>
         </div>
@@ -17,25 +17,33 @@
         <table id="data-table" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Student Number</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Publisher</th>
+                    <th>Genre</th>
+                    <th>Publication Date</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($students as $student)
+                @foreach ($books as $book)
                     <tr>
-                        <td>{{ $student->full_name }}</td>
-                        <td>{{ $student->student_number }}</td>
+                        <td>{{ $book->title }}</td>
+                        <td>{{ $book->author }}</td>
+                        <td>{{ $book->isbn }}</td>
+                        <td>{{ $book->publisher }}</td>
+                        <td>{{ $book->bookGenre->name }}</td>
+                        <td>{{ $book->publication_date }}</td>
                         <td class="text-right">
-                            {!! Form::open(['route' => ['students.destroy', $student->id], 'method' => 'delete']) !!}
+                            {!! Form::open(['route' => ['books.destroy', $book->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
-                                @can('update_students') 
-                                <a href="{{ route('students.edit', $student->id) }}" class='btn btn-default btn-xs'>
+                                @can('update_books') 
+                                <a href="{{ route('books.edit', $book->id) }}" class='btn btn-default btn-xs'>
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </a>
                                 @endcan
-                                @can('delete_students')
+                                @can('delete_books')
                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'type' => 'submit',
                                 'class' => 'btn btn-danger btn-xs',
@@ -50,8 +58,12 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Student Number</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Publisher</th>
+                    <th>Genre</th>
+                    <th>Publication Date</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </tfoot>

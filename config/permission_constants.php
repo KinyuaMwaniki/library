@@ -35,6 +35,14 @@ return [
                 'update_students',
                 'delete_students',
             ]
+        ],
+        'Books Menu' => [
+            'Books' => [
+                'read_books',
+                'create_books',
+                'update_books',
+                'delete_books',
+            ]
         ]
     ]
 ];

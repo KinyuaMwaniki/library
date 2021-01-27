@@ -6,6 +6,13 @@
     @endcan
 </ul>
 <ul class="nav side-menu">
+    @canany(['read_books'])
+        <li>
+            <a href="{!!  route('books.index') !!}"><i class="fa fa-book"></i>Books</a>
+        </li>
+    @endcan
+</ul>
+<ul class="nav side-menu">
     @canany(['read_roles', 'update_permissions', 'read_settings', 'read_users'])
         <li><a><i class="fa fa-unlock"></i> Settings <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">

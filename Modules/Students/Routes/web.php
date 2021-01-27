@@ -16,7 +16,6 @@ Route::prefix('students')->group(function() {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    // Roles
     Route::get('/students', 'StudentsController@index')->name('students.index')->permission('read_students');
     Route::get('/students/create', 'StudentsController@create')->name('students.create')->permission('create_students');
     Route::post('/students', 'StudentsController@store')->name('students.store')->permission('create_students');

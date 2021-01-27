@@ -6,5 +6,6 @@
     "User": true,
     "Taxes": true,
     "Settings": true,
-    "Students": true
+    "Students": true,
+    "Books": true
 }
