@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\Books\Entities\Book;
+use Modules\Students\Entities\Student;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $students = Student::all();
+        $books = Book::all();
+        return view('home', compact(['students', 'books']));
     }
 }

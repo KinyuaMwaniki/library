@@ -5,7 +5,10 @@ namespace Modules\Books\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Books\Entities\Book;
+use Modules\Books\Entities\Genre;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
+use Modules\Books\Http\Requests\CreateBookRequest;
 
 class BooksController extends Controller
 {
@@ -25,7 +28,8 @@ class BooksController extends Controller
      */
     public function create()
     {
-        return view('books::books.create');
+        $genres = Genre::pluck('name', 'id');
+        return view('books::books.create', compact('genres'));
     }
 
     /**
@@ -33,9 +37,19 @@ class BooksController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateBookRequest $request)
     {
-        //
+        $book = Book::create([
+            'title' => $request->title,
+            'author' => $request->author,
+            'isbn' => $request->isbn,
+            'publisher' => $request->publisher,
+            'genre_id' => $request->genre_id,
+            'publication_date' => $request->publication_date,
+        ]);
+
+        Session::flash('message', "Book Saved");
+        return redirect(route('books.index'));
     }
 
     /**
@@ -55,7 +69,16 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        return view('books::edit');
+        $book = Book::find($id);
+        $genres = Genre::pluck('name', 'id');
+
+        
+        if (empty($book)) {
+            Session::flash('message', "Book Not Found");
+            return redirect(route('books.index'));
+        }
+
+        return view('books::books.edit', compact(['book', 'genres']));
     }
 
     /**
@@ -66,7 +89,24 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $book = Book::find($id);
+        
+        if (empty($book)) {
+            Session::flash('message', "Book Not Found");
+            return redirect(route('books.index'));
+        }
+
+        $book->update([
+            'title' => $request->title,
+            'author' => $request->author,
+            'isbn' => $request->isbn,
+            'publisher' => $request->publisher,
+            'genre_id' => $request->genre_id,
+            'publication_date' => $request->publication_date,
+        ]);
+
+        Session::flash('message', "Book Updated");
+        return redirect(route('books.index'));
     }
 
     /**
@@ -76,6 +116,17 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = Book::find($id);
+        
+        if (empty($book)) {
+            Session::flash('message', "Book Not Found");
+            return redirect(route('books.index'));
+        }
+
+        // TODO: Felix add check if book is issued
+
+        $book->delete();
+        Session::flash('message', "Book Deleted");
+        return redirect(route('books.index'));  
     }
 }

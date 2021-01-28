@@ -1,35 +1,47 @@
-<!-- First Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('first_name', 'First Name<span class="required-marker">*</span>', '', false) !!}
-    {!! Form::text('first_name', null, ['class' => 'form-control', 'required' => 'required']) !!}
-    @error('first_name')
+    {!! Form::label('title', 'Book Title<span class="required-marker">*</span>', '', false) !!}
+    {!! Form::text('title', null, ['class' => 'form-control', 'required' => 'required']) !!}
+    @error('title')
         <div class="error text-danger">{{ $message }}</div>
     @enderror
 </div>
 
-<!-- First Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('middle_name', 'Middle Name<span class="required-marker">*</span>', '', false) !!}
-    {!! Form::text('middle_name', null, ['class' => 'form-control', 'required' => 'required']) !!}
-    @error('middle_name')
+    {!! Form::label('author', 'Author<span class="required-marker">*</span>', '', false) !!}
+    {!! Form::text('author', null, ['class' => 'form-control', 'required' => 'required']) !!}
+    @error('author')
         <div class="error text-danger">{{ $message }}</div>
     @enderror
 </div>
 
-<!-- First Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('last_name', 'Last Name<span class="required-marker">*</span>', '', false) !!}
-    {!! Form::text('last_name', null, ['class' => 'form-control', 'required' => 'required']) !!}
-    @error('last_name')
+    {!! Form::label('isbn', 'ISBN') !!}
+    {!! Form::text('isbn', null, ['class' => 'form-control']) !!}
+    @error('isbn')
         <div class="error text-danger">{{ $message }}</div>
     @enderror
 </div>
 
-<!-- First Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('student_number', 'Student Number<span class="required-marker">*</span>', '', false) !!}
-    {!! Form::text('student_number', null, ['class' => 'form-control', 'required' => 'required']) !!}
-    @error('student_number')
+    {!! Form::label('publisher', 'Publisher') !!}
+    {!! Form::text('publisher', null, ['class' => 'form-control']) !!}
+    @error('publisher')
+        <div class="error text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('publication_date', 'Publication Date') !!}
+    {!! Form::date('publication_date', null, ['class' => 'form-control']) !!}
+    @error('publication_date')
+        <div class="error text-danger">{{ $message }}</div>
+    @enderror
+</div>
+
+<div class="form-group col-sm-6">
+    {!! Form::label('genre_id', 'Genre<span class="required-marker">*</span>', '', false) !!}
+    {!! Form::select('genre_id', $genres, null, ['class' => 'form-control']) !!}
+    @error('genre_id')
         <div class="error text-danger">{{ $message }}</div>
     @enderror
 </div>

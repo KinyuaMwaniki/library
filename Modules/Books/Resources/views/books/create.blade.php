@@ -8,7 +8,9 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 ">
-            <book-create></book-create>
+            {!! Form::open(['route' => 'books.store']) !!}
+                @include('books::books.fields')
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection
