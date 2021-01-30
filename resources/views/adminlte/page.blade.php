@@ -10,6 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'WizERP') }}</title>
 
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     @include('adminlte.partials.css')
@@ -32,18 +35,18 @@
                     <p class="alert alert-danger alert-clearfix">{{ Session::get('error') }}</p>
                 @endif
                 @if (isset($failures))
-   <div class="alert alert-danger" role="alert">
-      <strong>Errors:</strong>
-      
-      <ul>
-         @foreach ($failures as $failure)
-            @foreach ($failure->errors() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-         @endforeach
-      </ul>
-   </div>
-@endif
+                <div class="alert alert-danger" role="alert">
+                    <strong>Errors:</strong>
+                    
+                    <ul>
+                        @foreach ($failures as $failure)
+                            @foreach ($failure->errors() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 @yield('content')
                 
             </div>

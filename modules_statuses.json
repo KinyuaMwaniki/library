@@ -5,5 +5,7 @@
     "Tax": true,
     "User": true,
     "Taxes": true,
-    "Settings": true
+    "Settings": true,
+    "Students": true,
+    "Books": true
 }

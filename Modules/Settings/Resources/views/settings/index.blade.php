@@ -5,23 +5,6 @@
         <div class="title_left">
             <h3>Current Settings</h3>
         </div>
-
-        {{-- <div class="title_right">
-            <div class="col-md-12 col-sm-12  form-group pull-right">
-                @can('update_settings')
-                <a href="{!!  route('inventories.create') !!}" class="btn btn-sm btn-info pull-right" type="button">Add
-                    New</a>
-                <a href="/storage/templates/inventory_import_template.csv" class="btn btn-sm btn-info pull-right mr-2"
-                    type="button"><i class="fa fa-download"></i> Template</a>
-                <form class="pull-right import-form form" method="POST" action="{{ route('inventories.import-csv') }}"
-                    enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <input type="file" class="form-gropu" id="customFile" name="inventory_imports">
-                    <button type="submit" class="inline btn btn-sm btn-info"><i class="fa fa-upload"></i> Import</button>
-                </form>
-                @endcan
-            </div>
-        </div> --}}
     </div>
     <div class="col-md-12 col-sm-12 ">
         <table id="data-tables" class="table" style="width:100%">
@@ -67,7 +50,6 @@
 
                         <tr>
                             <td>
-                                {{-- <a href="{{ route('policies.show', ['id' => $policy->id]) }}">{{ $policy->policy }}</a> --}}
                                 <a href="#">{{ $setting->policy }}</a>
                             </td>
                             <td>

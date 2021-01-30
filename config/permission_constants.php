@@ -28,6 +28,28 @@ return [
                 'delete_settings',
             ],
         ],
+        'Students Menu' => [
+            'Students' => [
+                'read_students',
+                'create_students',
+                'update_students',
+                'delete_students',
+            ]
+        ],
+        'Books Menu' => [
+            'Books' => [
+                'read_books',
+                'create_books',
+                'update_books',
+                'delete_books',
+            ],
+            'Issuances' => [
+                'read_issuances',
+                'create_issuances',
+                'update_issuances',
+                'delete_issuances',
+            ]
+        ]
     ]
 ];
 
