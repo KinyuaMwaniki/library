@@ -24,6 +24,11 @@
                         <a href="{!!  route('genres.index') !!}">Genres</a>
                     </li>
                 @endcan
+                @canany(['read_issuances'])
+                    <li>
+                        <a href="{!!  route('issuances.index') !!}">Book Issuances</a>
+                    </li>
+                @endcan
             </ul>
         </li>
     @endcan

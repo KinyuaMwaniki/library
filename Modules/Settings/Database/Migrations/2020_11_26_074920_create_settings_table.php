@@ -18,9 +18,6 @@ class CreateSettingsTable extends Migration
             $table->unsignedBigInteger('model_id')->unsigned()->index();
             $table->string('policy');
             $table->string('value');
-            $table->string('postfix')->nullable();
-            $table->string('second_value')->nullable();
-            $table->string('exceptions')->nullable();
             $table->text('description');
             $table->boolean('enabled');
             $table->timestamps();

@@ -42,6 +42,12 @@ return [
                 'create_books',
                 'update_books',
                 'delete_books',
+            ],
+            'Issuances' => [
+                'read_issuances',
+                'create_issuances',
+                'update_issuances',
+                'delete_issuances',
             ]
         ]
     ]

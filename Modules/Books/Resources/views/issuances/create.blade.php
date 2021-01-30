@@ -3,14 +3,12 @@
 @section('content')
     <div class="page-title row">
         <div class="title_left ml-4">
-            <h3>Add Tax</h3>
+            <h3>Issue Book</h3>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 ">
-            {!! Form::open(['route' => 'taxes.store']) !!}
-            @include('tax::taxes.fields')
-            {!! Form::close() !!}
+            <issue-books :all_books="{{ json_encode($books) }}"></issue-books>
         </div>
     </div>
 @endsection

@@ -4,11 +4,10 @@ namespace Modules\Settings\Database\Seeders;
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Modules\Books\Entities\Book;
 use Illuminate\Support\Facades\DB;
+use Modules\Books\Entities\Issuance;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Inventory\Entities\StkItem;
-use Modules\Inventory\Entities\StkGroup;
-use Modules\Inventory\Entities\StkCosting;
 
 class ModelsTableSeeder extends Seeder
 {
@@ -28,7 +27,20 @@ class ModelsTableSeeder extends Seeder
         
         DB::table('models')->insert(
             [
-            
+                [
+                    'id' => Book::MODEL_ID,
+                    'name' => 'Book',
+                    'description' => 'This module deals with books creation, editing, and deletion',
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ],
+                [
+                    'id' => Issuance::MODEL_ID,
+                    'name' => 'Issuance',
+                    'description' => 'This module deals with issuing books to students',
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ],
             ]
         );
     }

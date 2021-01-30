@@ -3,12 +3,12 @@
 @section('content')
     <div class="page-title">
         <div class="title_left">
-            <h3>Taxes</h3>
+            <h3>Issuances</h3>
         </div>
         <div class="title_right">
             <div class="col-md-5 col-sm-5  form-group pull-right">
-                @can('create_taxes')
-                    <a href="{!!  route('taxes.create') !!}" class="btn btn-sm btn-info pull-right" type="button">Add New</a>
+                @can('create_books')
+                    <a href="{!!  route('issuances.create') !!}" class="btn btn-info pull-right" type="button">Add New</a>
                 @endcan
             </div>
         </div>
@@ -17,29 +17,41 @@
         <table id="data-table" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>Value</th>
-                    <th>Active</th>
+                    <th>Book</th>
+                    <th>Student</th>
+                    <th>Date Issued</th>
+                    <th>Date Expected</th>
+                    <th>Date Returned</th>
+                    <th>Status</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($taxes as $tax)
+                @foreach ($issuances as $issuance)
                     <tr>
-                        <td>{{ $tax->code }}</td>
-                        <td>{{ $tax->description }}</td>
-                        <td>{{ $tax->value }} %</td>
-                        <td>{{ $tax->active }}</td>
+                        <td>{{ $issuance->book->title }}</td>
+                        <td>{{ $issuance->student->full_name }}</td>
+                        <td>{{ $issuance->date_issued->format('Y m d') }}</td>
+                        <td>{{ $issuance->date_expected->format('Y m d') }}</td>
+                        <td>{{ $issuance->date_returned ? $issuance->date_returned->format('Y m d') : '' }}</td>
+                        <td>
+                            @if($issuance->status === 0)
+                                <i class="fa fa-check green" ></i>
+                            @elseif($issuance->status === 1)
+                                <i class="fa fa-calendar green"></i>
+                            @else
+                                <i class="fa fa-exclamation red"></i>
+                            @endif
+                        </td>
                         <td class="text-right">
-                            {!! Form::open(['route' => ['taxes.destroy', $tax->tax_id], 'method' => 'delete']) !!}
+                            {!! Form::open(['route' => ['issuances.destroy', $issuance->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
-                                @can('update_taxes') 
-                                <a href="{{ route('taxes.edit', $tax->tax_id) }}" class='btn btn-default btn-xs'>
+                                @can('update_issuances') 
+                                <a href="{{ route('issuances.edit', $issuance->id) }}" class='btn btn-default btn-xs'>
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </a>
                                 @endcan
-                                @can('delete_taxes')
+                                @can('delete_issuances')
                                 {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
                                 'type' => 'submit',
                                 'class' => 'btn btn-danger btn-xs',
@@ -54,10 +66,12 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Code</th>
-                    <th>Description</th>
-                    <th>Value</th>
-                    <th>Active</th>
+                    <th>Boo</th>
+                    <th>ISBN</th>
+                    <th>Student</th>
+                    <th>Date Issued</th>
+                    <th>Date Expected</th>
+                    <th>Status</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </tfoot>

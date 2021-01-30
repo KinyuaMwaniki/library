@@ -5,9 +5,8 @@ namespace Modules\Settings\Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Modules\Books\Entities\Issuance;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Inventory\Entities\StkItem;
-use Modules\Inventory\Entities\StkGroup;
 
 class SettingsDatabaseSeeder extends Seeder
 {
@@ -23,63 +22,41 @@ class SettingsDatabaseSeeder extends Seeder
 
         Model::unguard();
 
-        // $now = Carbon::now();
+        $now = Carbon::now();
 
-        // DB::table('settings')->insert(
-        //     [
-        //         [
-        //             'model_id' => StkItem::MODEL_ID,
-        //             'policy' => StkItem::NUMBERING_FORMAT,
-        //             'value' => '6',
-        //             'postfix' => '',
-        //             'second_value' => '3',
-        //             'exceptions' => '',
-        //             'description' => 'This policy sets the length of the inventory code id',
-        //             'enabled' => true,
-        //             'created_at' => $now,
-        //             'updated_at' => $now
-        //         ],
+        DB::table('settings')->insert(
+            [
+                [
+                    'model_id' => Issuance::MODEL_ID,
+                    'policy' => Issuance::DEFAULT_ISSUE_DAYS,
+                    'value' => '6',
+                    'description' => 'This policy sets the days a book is issued by default',
+                    'enabled' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ],
                 
-        //         [
-        //             'model_id' => StkItem::MODEL_ID,
-        //             'policy' => StkItem::AUTOMATIC_NUMBERING,
-        //             'value' => 'false',
-        //             'postfix' => '',
-        //             'second_value' => '',
-        //             'exceptions' => '',
-        //             'description' => 'When true, the system generates inventory code',
-        //             'enabled' => true,
-        //             'created_at' => $now,
-        //             'updated_at' => $now
-        //         ],
+                [
+                    'model_id' => Issuance::MODEL_ID,
+                    'policy' => Issuance::MAXIMUM_ISSUES_PER_STUDENT,
+                    'value' => '3',
+                    'description' => 'This policy determines how many books a student can have at a time',
+                    'enabled' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ],
 
-        //         [
-        //             'model_id' => StkGroup::MODEL_ID,
-        //             'policy' => StkGroup::NUMBERING_FORMAT_TEST,
-        //             'value' => '4',
-        //             'postfix' => '',
-        //             'second_value' => '',
-        //             'exceptions' => '',
-        //             'description' => 'When true, the system generates inventory code test',
-        //             'enabled' => true,
-        //             'created_at' => $now,
-        //             'updated_at' => $now
-        //         ],
-
-        //         [
-        //             'model_id' => StkGroup::MODEL_ID,
-        //             'policy' => StkGroup::AUTOMATIC_NUMBERING_TEST,
-        //             'value' => 'true',
-        //             'postfix' => '',
-        //             'second_value' => '',
-        //             'exceptions' => '',
-        //             'description' => 'When true, the system generates inventory code test',
-        //             'enabled' => true,
-        //             'created_at' => $now,
-        //             'updated_at' => $now
-        //         ],
-        //     ]
-        // );
+                [
+                    'model_id' => Issuance::MODEL_ID,
+                    'policy' => Issuance::PRINT_ISSUE_CARD,
+                    'value' => 'true',
+                    'description' => 'When true, the system creates a printout with issue details',
+                    'enabled' => true,
+                    'created_at' => $now,
+                    'updated_at' => $now
+                ],
+            ]
+        );
 
         Model::reguard();
     }
