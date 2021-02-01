@@ -5,7 +5,10 @@
       <input type="text" class="form-control" v-model="search_item" />
     </div>
     <div class="form-group col-sm-12" v-if="searched_books.length > 0">
-      <books-result></books-result>
+      <books-result :books="searched_books" @select-book="selectBook"></books-result>
+    </div>
+    <div class="form-group col-sm-12" v-if="selected_books.length > 0">
+      <books-selected :books="selected_books" @remove-book="removeBook"></books-selected>
     </div>
   </div>
 </template>
@@ -17,6 +20,7 @@ export default {
     return {
       search_item: "",
       searched_books: [],
+      selected_books: []
     };
   },
   watch: {
@@ -47,6 +51,13 @@ export default {
         }
       }
     },
+    selectBook(book) {
+      this.selected_books.push(book);
+      this.search_item = "";
+    },
+    removeBook(book) {
+      this.selected_books = this.selected_books.filter((selected) => selected.id != book.id);
+    }
   },
 };
 </script>

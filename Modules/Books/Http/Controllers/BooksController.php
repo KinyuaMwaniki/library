@@ -21,7 +21,7 @@ class BooksController extends Controller
         $books = Book::all();
         return view('books::books.index', compact('books'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      * @return Response
@@ -46,6 +46,8 @@ class BooksController extends Controller
             'publisher' => $request->publisher,
             'genre_id' => $request->genre_id,
             'publication_date' => $request->publication_date,
+            'total_stock' => $request->total_stock,
+            'total_available' => $request->total_stock,
         ]);
 
         Session::flash('message', "Book Saved");
@@ -59,7 +61,16 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        return view('books::show');
+        $book = Book::find($id);
+        $genres = Genre::pluck('name', 'id');
+
+        
+        if (empty($book)) {
+            Session::flash('message', "Book Not Found");
+            return redirect(route('books.index'));
+        }
+
+        return view('books::books.show', compact(['book']));    
     }
 
     /**
@@ -103,6 +114,8 @@ class BooksController extends Controller
             'publisher' => $request->publisher,
             'genre_id' => $request->genre_id,
             'publication_date' => $request->publication_date,
+            'total_stock' => $request->total_stock,
+
         ]);
 
         Session::flash('message', "Book Updated");

@@ -18,6 +18,9 @@
   color: red;
 }
 
+.x_title {
+  border-bottom: 0 solid #E6E9ED;
+}
 
  /* Customize the label (the container) */
  .container_check {

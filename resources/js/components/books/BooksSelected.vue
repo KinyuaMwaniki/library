@@ -22,10 +22,10 @@
               <td>{{ book.isbn }}</td>
               <td>
                 <button
-                  class="btn btn-sm green"
-                  @click="$emit('select-book', book)"
+                  class="btn btn-sm red"
+                  @click="$emit('remove-book', book)"
                 >
-                  <i class="fa fa-plus"></i>
+                  <i class="fa fa-minus"></i>
                 </button>
               </td>
             </tr>
@@ -39,14 +39,9 @@
 <script>
 export default {
   props: ["books"],
-  emits: ["select-book"],
+  emits: ["remove-book"],
   data() {
     return {};
-  },
-  methods: {
-    selectBook() {
-      this.$emit;
-    },
   },
 };
 </script>

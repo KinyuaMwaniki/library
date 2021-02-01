@@ -21,6 +21,8 @@ class CreateBooksTable extends Migration
             $table->string('publisher')->nullable();
             $table->unsignedBigInteger('genre_id')->unsigned()->index();
             $table->date('publication_date')->nullable();
+            $table->integer('total_stock');
+            $table->integer('total_available');
             $table->timestamps();
 
             $table->foreign('genre_id')

@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/books', 'BooksController@index')->name('books.index')->permission('read_books');
     Route::get('/books/create', 'BooksController@create')->name('books.create')->permission('create_books');
     Route::post('/books', 'BooksController@store')->name('books.store')->permission('create_books');
+    Route::get('/books/{book}', 'BooksController@show')->name('books.show')->permission('read_books');
     Route::get('/books/{book}/edit', 'BooksController@edit')->name('books.edit')->permission('update_books');
     Route::patch('/books/{book}', 'BooksController@update')->name('books.update')->permission('update_books');
     Route::delete('/books/{book}', 'BooksController@destroy')->name('books.destroy')->permission('delete_books');
