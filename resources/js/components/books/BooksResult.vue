@@ -40,13 +40,11 @@
 export default {
   props: ["books"],
   emits: ["select-book"],
-  data() {
-    return {};
-  },
-  methods: {
-    selectBook() {
-      this.$emit;
-    },
-  },
 };
 </script>
+
+<style  scoped>
+  .table th {
+    border-top: 0px;
+  }
+</style>

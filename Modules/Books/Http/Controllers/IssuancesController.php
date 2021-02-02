@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Modules\Books\Entities\Book;
 use Illuminate\Routing\Controller;
 use Modules\Books\Entities\Issuance;
+use Modules\Students\Entities\Student;
 
 class IssuancesController extends Controller
 {
@@ -27,7 +28,8 @@ class IssuancesController extends Controller
     public function create()
     {
         $books = Book::all();
-        return view('books::issuances.create', compact('books'));
+        $students = Student::all();
+        return view('books::issuances.create', compact(['books', 'students']));
     }
 
     /**

@@ -1,31 +1,29 @@
 <template>
   <div>
     <div class="x_panel">
-      <!-- <div class="x_title">
-        <h2>Selected Books</h2>
+      <div class="x_title">
+        <h2>Selected Students</h2>
         <div class="clearfix"></div>
-      </div> -->
+      </div>
       <div class="x_content">
         <table class="table">
           <thead>
             <tr>
-              <th>Book Title</th>
-              <th>Book Author</th>
-              <th>ISBN</th>
+              <th>Name</th>
+              <th>Student Number</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="book in books" :key="book.id">
-              <td>{{ book.title }}</td>
-              <td>{{ book.author }}</td>
-              <td>{{ book.isbn }}</td>
+            <tr v-for="student in students" :key="student.id">
+              <th>{{ student.full_name }}</th>
+              <td>{{ student.student_number }}</td>
               <td>
                 <button
-                  class="btn btn-sm red"
-                  @click="$emit('remove-book', book)"
+                  class="btn btn-sm green"
+                  @click="$emit('select-student', student)"
                 >
-                  <i class="fa fa-minus"></i>
+                  <i class="fa fa-plus"></i>
                 </button>
               </td>
             </tr>
@@ -38,8 +36,8 @@
 
 <script>
 export default {
-  props: ["books"],
-  emits: ["remove-book"],
+  props: ["students"],
+  emits: ["select-student"],
 };
 </script>
 

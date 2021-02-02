@@ -64,17 +64,6 @@
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Boo</th>
-                    <th>ISBN</th>
-                    <th>Student</th>
-                    <th>Date Issued</th>
-                    <th>Date Expected</th>
-                    <th>Status</th>
-                    <th class="text-right">Actions</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 @endsection

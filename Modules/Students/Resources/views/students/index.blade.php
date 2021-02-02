@@ -48,13 +48,6 @@
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Student Number</th>
-                    <th class="text-right">Actions</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 @endsection

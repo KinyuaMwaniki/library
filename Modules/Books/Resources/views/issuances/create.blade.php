@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 ">
-            <issue-books :all_books="{{ json_encode($books) }}"></issue-books>
+            <issue-books :all_books="{{ json_encode($books) }} " :all_students="{{ json_encode($students) }}"></issue-books>
         </div>
     </div>
 @endsection
