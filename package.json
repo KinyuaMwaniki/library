@@ -26,6 +26,7 @@
     "dependencies": {
         "font-awesome": "^4.7.0",
         "gentelella": "^1.4.0",
+        "v-toaster": "^1.0.3",
         "vuex": "^4.0.0-rc.2"
     }
 }

@@ -28,6 +28,9 @@
                     <li>
                         <a href="{!!  route('issuances.index') !!}">Book Issuances</a>
                     </li>
+                    <li>
+                        <a href="{!!  route('issuances.overdue') !!}">Overdue Books</a>
+                    </li>
                 @endcan
             </ul>
         </li>
@@ -43,7 +46,7 @@
                     <a href="{!!  route('user.index') !!}">Users</a>
                 </li>
                 @endcan
-                @can('read_roles')
+                {{-- @can('read_roles')
                     <li>
                         <a href="{!!  route('role.index') !!}">Roles</a>
                     </li>
@@ -52,7 +55,7 @@
                     <li>
                         <a href="{!!  route('permissions.index') !!}">Permissions</a>
                     </li>
-                @endcan
+                @endcan --}}
                 @can('read_settings')
                     <li>
                         <a href="{!!  route('settings.index') !!}">System Settings</a>

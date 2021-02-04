@@ -47,7 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/issuances', 'IssuancesController@index')->name('issuances.index')->permission('read_issuances');
     Route::get('/issuances/create', 'IssuancesController@create')->name('issuances.create')->permission('create_issuances');
     Route::post('/issuances', 'IssuancesController@store')->name('issuances.store')->permission('create_issuances');
+    Route::get('/issuances/{issuance}', 'IssuancesController@show')->name('issuances.show')->permission('read_issuances');
     Route::get('/issuances/{issuance}/edit', 'IssuancesController@edit')->name('issuances.edit')->permission('update_issuances');
     Route::patch('/issuances/{issuance}', 'IssuancesController@update')->name('issuances.update')->permission('update_issuances');
     Route::delete('/issuances/{issuance}', 'IssuancesController@destroy')->name('issuances.destroy')->permission('delete_issuances');
+    Route::get('/issuances-overdue', 'IssuancesController@issuancesOverdue')->name('issuances.overdue')->permission('read_issuances');
 });

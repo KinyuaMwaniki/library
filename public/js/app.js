@@ -1996,10 +1996,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["books"],
   emits: ["remove-book"]
@@ -2056,8 +2052,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["all_books", "all_students"],
+  props: ["all_books", "all_students", "all_settings"],
   data: function data() {
     return {
       book: "",
@@ -2065,7 +2072,10 @@ __webpack_require__.r(__webpack_exports__);
       selected_books: [],
       student: "",
       searched_students: [],
-      selected_student: ""
+      selected_student: "",
+      date_expected: null,
+      maximum_issues_per_student: 0,
+      print_issue_card: false
     };
   },
   watch: {
@@ -2075,6 +2085,9 @@ __webpack_require__.r(__webpack_exports__);
     student: function student() {
       this.searchStudents();
     }
+  },
+  mounted: function mounted() {
+    this.initializeSettings();
   },
   methods: {
     searchBooks: function searchBooks() {
@@ -2117,8 +2130,61 @@ __webpack_require__.r(__webpack_exports__);
       this.student = "";
       this.searched_students = [];
     },
-    removeStudent: function removeStudent(student) {
+    removeStudent: function removeStudent() {
       this.selected_student = "";
+    },
+    issue: function issue() {
+      var _this = this;
+
+      var form = {};
+      form.books = this.selected_books;
+      form.student = this.selected_student;
+      form.date_expected = this.date_expected;
+      var submit_method = "POST";
+      var uri = "/api/v1/issuances";
+      var submit_data = form;
+      var that = this;
+      axios({
+        method: submit_method,
+        url: uri,
+        data: submit_data
+      }).then(function (response) {
+        if (response.data.success == true) {
+          _this.selected_student = "";
+          _this.selected_books = [];
+
+          _this.$toaster.success("Issuance Saved.", {
+            timeout: 5000
+          });
+        }
+      })["catch"](function (error) {
+        that.$toaster.error("Error, Please try again.", {
+          timeout: 5000
+        });
+
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log("Error", error.message);
+        }
+
+        console.log(error.config);
+      });
+    },
+    initializeSettings: function initializeSettings() {
+      for (var i = 0; i < this.all_settings.length; i++) {
+        if (this.all_settings[i].policy === "DEFAULT ISSUE DAYS") {
+          this.date_expected = this.all_settings[i].date_expected;
+        } else if (this.all_settings[i].policy === "MAXIMUM ISSUES PER STUDENT") {
+          this.maximum_issues_per_student = this.all_settings[i].value;
+        } else if (this.all_settings[i].policy === "PRINT ISSUE CARD") {
+          this.print_issue_card = this.all_settings[i].value;
+        }
+      }
     }
   }
 });
@@ -2211,10 +2277,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["student"],
+  props: ["student", "max_issues"],
   emits: ["remove-student"]
 });
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/v-toaster/dist/v-toaster.css":
+/*!***********************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/v-toaster/dist/v-toaster.css ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".v-toaster{position:fixed;top:50px;right:0;z-index:10000;width:300px;padding-left:10px;padding-right:10px}.v-toaster .v-toast{margin-bottom:10px;transition:all .3s ease;border:1px solid #454d5d;border-radius:8px;color:#fff;display:block;padding:1rem;background:rgba(69,77,93,.9);border-color:#454d5d}.v-toaster .v-toast.v-toast-enter,.v-toaster .v-toast.v-toast-leave-to{transform:translate(100%)}.v-toaster .v-toast.v-toast-success{background:rgba(50,182,67,.9);border-color:#32b643}.v-toaster .v-toast.v-toast-warning{background:rgba(255,183,0,.9);border-color:#ffb700}.v-toaster .v-toast.v-toast-info{background:rgba(91,192,222,.9);border-color:#5bc0de}.v-toaster .v-toast.v-toast-error{background:rgba(232,86,0,.9);border-color:#e85600}.v-toaster .v-toast.v-toast-primary{background:rgba(66,139,202,.9);border-color:#428bca}.v-toaster .v-toast .v-toast-btn-clear{background:transparent;border:0;color:currentColor;opacity:.45;text-decoration:none;float:right;cursor:pointer}.v-toaster .v-toast .v-toast-btn-clear:hover{opacity:.85}.v-toaster .v-toast .v-toast-btn-clear:before{content:\"\\2715\"}@media (max-width:300px){.v-toaster{width:100%}}", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -20643,6 +20731,47 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/v-toaster/dist/v-toaster.css":
+/*!***************************************************!*\
+  !*** ./node_modules/v-toaster/dist/v-toaster.css ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./v-toaster.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/v-toaster/dist/v-toaster.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/v-toaster/dist/v-toaster.js":
+/*!**************************************************!*\
+  !*** ./node_modules/v-toaster/dist/v-toaster.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function(t,e){ true?module.exports=e():undefined})(this,function(){return function(t){function e(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return t[o].call(r.exports,r,r.exports,e),r.l=!0,r.exports}var n={};return e.m=t,e.c=n,e.i=function(t){return t},e.d=function(t,n,o){e.o(t,n)||Object.defineProperty(t,n,{configurable:!1,enumerable:!0,get:o})},e.n=function(t){var n=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(n,"a",n),n},e.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},e.p=".",e(e.s=6)}([function(t,e,n){var o=n(3);o.install=function(t,e){t.prototype.$toaster=new(t.extend(o))({propsData:e}),t.toaster=t.prototype.$toaster},t.exports=o},function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default={props:{timeout:{type:Number,default:1e4}},methods:{success:function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};this.add(t,{theme:"v-toast-success",timeout:e.timeout})},info:function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};this.add(t,{theme:"v-toast-info",timeout:e.timeout})},warning:function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};this.add(t,{theme:"v-toast-warning",timeout:e.timeout})},error:function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};this.add(t,{theme:"v-toast-error",timeout:e.timeout})},add:function(t,e){var n=this,o=e.theme,r=e.timeout;this.$parent||(this.$mount(),document.body.appendChild(this.$el));var i={message:t,theme:o,key:Date.now()+"-"+Math.random()};this.items.push(i),setTimeout(function(){return n.remove(i)},r||this.timeout)},remove:function(t){var e=this.items.indexOf(t);e>=0&&this.items.splice(e,1)}},data:function(){return{items:[]}}}},function(t,e){},function(t,e,n){n(2);var o=n(4)(n(1),n(5),null,null);t.exports=o.exports},function(t,e){t.exports=function(t,e,n,o){var r,i=t=t||{},s=typeof t.default;"object"!==s&&"function"!==s||(r=t,i=t.default);var u="function"==typeof i?i.options:i;if(e&&(u.render=e.render,u.staticRenderFns=e.staticRenderFns),n&&(u._scopeId=n),o){var a=u.computed||(u.computed={});Object.keys(o).forEach(function(t){var e=o[t];a[t]=function(){return e}})}return{esModule:r,exports:i,options:u}}},function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"v-toaster"},[n("transition-group",{attrs:{name:"v-toast"}},t._l(t.items,function(e){return n("div",{key:e.key,staticClass:"v-toast",class:(o={},o[e.theme]=e.theme,o)},[n("a",{staticClass:"v-toast-btn-clear",on:{click:function(n){t.remove(e)}}}),t._v(t._s(e.message))]);var o}))],1)},staticRenderFns:[]}},function(t,e,n){t.exports=n(0)}])});
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/books/BooksResult.vue?vue&type=template&id=b0dbb8b2&scoped=true&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/books/BooksResult.vue?vue&type=template&id=b0dbb8b2&scoped=true& ***!
@@ -20881,7 +21010,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.selected_student.length === 0
+    _vm.selected_student.length === 0 && _vm.selected_books.length > 0
       ? _c("div", { staticClass: "form-group col-sm-12" }, [
           _c("label", [_vm._v("Search name or student number")]),
           _vm._v(" "),
@@ -20929,7 +21058,10 @@ var render = function() {
           { staticClass: "form-group col-sm-12" },
           [
             _c("students-selected", {
-              attrs: { student: _vm.selected_student },
+              attrs: {
+                student: _vm.selected_student,
+                max_issues: _vm.maximum_issues_per_student
+              },
               on: { "remove-student": _vm.removeStudent }
             })
           ],
@@ -20937,9 +21069,41 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
+    _vm.selected_student.length !== 0
+      ? _c("div", { staticClass: "form-group col-sm-12" }, [
+          _c("label", [_vm._v("Return Date")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.date_expected,
+                expression: "date_expected"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "date" },
+            domProps: { value: _vm.date_expected },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.date_expected = $event.target.value
+              }
+            }
+          })
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _vm.selected_student.length !== 0 && _vm.selected_books.length > 0
       ? _c("div", { staticClass: "form-group col-sm-12" }, [
-          _c("button", { staticClass: "btn btn-success" }, [_vm._v("Issue")])
+          _c(
+            "button",
+            { staticClass: "btn btn-success", on: { click: _vm.issue } },
+            [_vm._v("Issue")]
+          )
         ])
       : _vm._e()
   ])
@@ -21058,7 +21222,22 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "x_content" }, [
         _c("div", { staticClass: "col-sm-9" }, [
-          _c("p", [_vm._v(_vm._s(_vm.student.full_name))]),
+          _c("p", [
+            _vm._v(
+              " \n            " +
+                _vm._s(_vm.student.full_name) +
+                "\n            "
+            ),
+            _vm.student.unreturned_books >= _vm.max_issues
+              ? _c("span", { staticClass: "red" }, [
+                  _vm._v(
+                    ": Student has " +
+                      _vm._s(_vm.student.unreturned_books) +
+                      " unreturned books"
+                  )
+                ])
+              : _vm._e()
+          ]),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.student.student_number))])
         ]),
@@ -33265,12 +33444,25 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var v_toaster__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-toaster */ "./node_modules/v-toaster/dist/v-toaster.js");
+/* harmony import */ var v_toaster__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(v_toaster__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var v_toaster_dist_v_toaster_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-toaster/dist/v-toaster.css */ "./node_modules/v-toaster/dist/v-toaster.css");
+/* harmony import */ var v_toaster_dist_v_toaster_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_toaster_dist_v_toaster_css__WEBPACK_IMPORTED_MODULE_1__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+ // You need a specific loader for CSS files like https://github.com/webpack/css-loader
+
+ // optional set default imeout, the default is 10000 (10 seconds).
+
+Vue.use(v_toaster__WEBPACK_IMPORTED_MODULE_0___default.a, {
+  timeout: 5000
+});
 
 __webpack_require__(/*! ./components */ "./resources/js/components.js");
 

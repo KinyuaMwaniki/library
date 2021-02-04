@@ -1,10 +1,6 @@
 <template>
   <div>
     <div class="x_panel">
-      <!-- <div class="x_title">
-        <h2>Selected Books</h2>
-        <div class="clearfix"></div>
-      </div> -->
       <div class="x_content">
         <table class="table">
           <thead>

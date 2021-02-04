@@ -16,11 +16,14 @@
         @remove-book="removeBook"
       ></books-selected>
     </div>
-    <div class="form-group col-sm-12" v-if="selected_student.length === 0">
+    <div
+      class="form-group col-sm-12"
+      v-if="selected_student.length === 0 && selected_books.length > 0"
+    >
       <label>Search name or student number</label>
       <input type="text" class="form-control" v-model="student" />
     </div>
-    <div class="form-group col-sm-12" v-if="searched_students.length > 0 ">
+    <div class="form-group col-sm-12" v-if="searched_students.length > 0">
       <students-result
         :students="searched_students"
         @select-student="selectStudent"
@@ -29,18 +32,26 @@
     <div class="form-group col-sm-12" v-if="selected_student.length !== 0">
       <students-selected
         :student="selected_student"
+        :max_issues="maximum_issues_per_student"
         @remove-student="removeStudent"
       ></students-selected>
     </div>
-    <div class="form-group col-sm-12" v-if="selected_student.length !== 0 && selected_books.length > 0">
-      <button class="btn btn-success">Issue</button>
+    <div class="form-group col-sm-12" v-if="selected_student.length !== 0">
+      <label>Return Date</label>
+      <input type="date" class="form-control" v-model="date_expected" />
+    </div>
+    <div
+      class="form-group col-sm-12"
+      v-if="selected_student.length !== 0 && selected_books.length > 0"
+    >
+      <button class="btn btn-success" @click="issue">Issue</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["all_books", "all_students"],
+  props: ["all_books", "all_students", "all_settings"],
   data() {
     return {
       book: "",
@@ -49,6 +60,9 @@ export default {
       student: "",
       searched_students: [],
       selected_student: "",
+      date_expected: null,
+      maximum_issues_per_student: 0,
+      print_issue_card: false,
     };
   },
   watch: {
@@ -58,6 +72,9 @@ export default {
     student() {
       this.searchStudents();
     },
+  },
+  mounted() {
+    this.initializeSettings();
   },
   methods: {
     searchBooks() {
@@ -122,8 +139,55 @@ export default {
       this.student = "";
       this.searched_students = [];
     },
-    removeStudent(student) {
+    removeStudent() {
       this.selected_student = "";
+    },
+    issue() {
+      let form = {};
+      form.books = this.selected_books;
+      form.student = this.selected_student;
+      form.date_expected = this.date_expected;
+
+      let submit_method = "POST";
+      let uri = "/api/v1/issuances";
+      let submit_data = form;
+
+      let that = this;
+
+      axios({ method: submit_method, url: uri, data: submit_data })
+        .then((response) => {
+          if (response.data.success == true) {
+            this.selected_student = "";
+            this.selected_books = [];
+            this.$toaster.success("Issuance Saved.", { timeout: 5000 });
+          }
+        })
+        .catch(function (error) {
+          that.$toaster.error("Error, Please try again.", { timeout: 5000 });
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+    },
+    initializeSettings() {
+      for (let i = 0; i < this.all_settings.length; i++) {
+        if (this.all_settings[i].policy === "DEFAULT ISSUE DAYS") {
+          this.date_expected = this.all_settings[i].date_expected;
+        } else if (
+          this.all_settings[i].policy === "MAXIMUM ISSUES PER STUDENT"
+        ) {
+          this.maximum_issues_per_student = this.all_settings[i].value;
+        } else if (this.all_settings[i].policy === "PRINT ISSUE CARD") {
+          this.print_issue_card = this.all_settings[i].value;
+        }
+      }
     },
   },
 };

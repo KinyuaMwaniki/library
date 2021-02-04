@@ -46,6 +46,11 @@
                         <td class="text-right">
                             {!! Form::open(['route' => ['issuances.destroy', $issuance->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
+                                @can('read_issuances')
+                                <a class='btn btn-default btn-xs green' href="{{ route('issuances.show', $issuance->id) }}">
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                </a>
+                                @endcan
                                 @can('update_issuances') 
                                 <a href="{{ route('issuances.edit', $issuance->id) }}" class='btn btn-default btn-xs'>
                                     <i class="glyphicon glyphicon-edit"></i>

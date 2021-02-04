@@ -7,7 +7,10 @@
       </div>
       <div class="x_content">
         <div class="col-sm-9">
-          <p>{{ student.full_name }}</p>
+          <p> 
+              {{ student.full_name }}
+              <span v-if="student.unreturned_books >= max_issues" class="red">: Student has {{ student.unreturned_books }} unreturned books</span>
+          </p>
           <p>{{ student.student_number }}</p>
         </div>
         <div class="col-sm-3">
@@ -25,7 +28,7 @@
 
 <script>
 export default {
-  props: ["student"],
+  props: ["student", "max_issues"],
   emits: ["remove-student"],
 };
 </script>

@@ -46,15 +46,15 @@ class SettingsDatabaseSeeder extends Seeder
                     'updated_at' => $now
                 ],
 
-                [
-                    'model_id' => Issuance::MODEL_ID,
-                    'policy' => Issuance::PRINT_ISSUE_CARD,
-                    'value' => 'true',
-                    'description' => 'When true, the system creates a printout with issue details',
-                    'enabled' => true,
-                    'created_at' => $now,
-                    'updated_at' => $now
-                ],
+                // [
+                //     'model_id' => Issuance::MODEL_ID,
+                //     'policy' => Issuance::PRINT_ISSUE_CARD,
+                //     'value' => 'true',
+                //     'description' => 'When true, the system creates a printout with issue details',
+                //     'enabled' => true,
+                //     'created_at' => $now,
+                //     'updated_at' => $now
+                // ],
             ]
         );
 

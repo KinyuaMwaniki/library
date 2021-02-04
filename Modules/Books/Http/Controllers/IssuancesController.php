@@ -2,11 +2,13 @@
 
 namespace Modules\Books\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Books\Entities\Book;
 use Illuminate\Routing\Controller;
 use Modules\Books\Entities\Issuance;
+use Modules\Settings\Entities\Setting;
 use Modules\Students\Entities\Student;
 
 class IssuancesController extends Controller
@@ -29,7 +31,8 @@ class IssuancesController extends Controller
     {
         $books = Book::all();
         $students = Student::all();
-        return view('books::issuances.create', compact(['books', 'students']));
+        $settings = Setting::select('policy', 'value')->get();
+        return view('books::issuances.create', compact(['books', 'students', 'settings']));
     }
 
     /**
@@ -49,7 +52,14 @@ class IssuancesController extends Controller
      */
     public function show($id)
     {
-        return view('books::show');
+        $issuance = Issuance::find($id);
+        
+        if (empty($issuance)) {
+            Session::flash('message', "Issuance Not Found");
+            return redirect(route('issuances.index'));
+        }
+
+        return view('books::issuances.show', compact(['issuance'])); 
     }
 
     /**
@@ -59,7 +69,14 @@ class IssuancesController extends Controller
      */
     public function edit($id)
     {
-        return view('books::edit');
+        $issuance = Issuance::find($id);
+        
+        if (empty($issuance)) {
+            Session::flash('message', "Issuance Not Found");
+            return redirect(route('issuances.index'));
+        }
+
+        return view('books::issuances.edit', compact(['issuance'])); 
     }
 
     /**
@@ -81,5 +98,11 @@ class IssuancesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function issuancesOverdue()
+    {
+        $issuances = Issuance::whereNull('date_returned')->where('date_expected', '<', Carbon::today())->get();
+        return view('books::issuances.overdue', compact('issuances'));
     }
 }
