@@ -18,6 +18,15 @@
   color: red;
 }
 
+.x_title {
+  border-bottom: 0 solid #E6E9ED;
+}
+
+.right-landing {
+  background-image: url("../images/colors.jpg");
+  /* background-repeat: no-repeat, repeat;
+  background-color: #cccccc; */
+}
 
  /* Customize the label (the container) */
  .container_check {

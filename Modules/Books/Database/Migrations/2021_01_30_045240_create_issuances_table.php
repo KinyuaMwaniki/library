@@ -17,10 +17,11 @@ class CreateIssuancesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('book_id')->unsigned()->index();
             $table->unsignedBigInteger('student_id')->unsigned()->index();
+            $table->unsignedBigInteger('user_id')->unsigned()->index();
             $table->date('date_issued');
             $table->date('date_expected');
             $table->date('date_returned')->nullable();
-
+            $table->unsignedBigInteger('received_by_id')->nullable();
 
             $table->timestamps();
 
@@ -32,6 +33,11 @@ class CreateIssuancesTable extends Migration
             $table->foreign('student_id')
             ->references('id')
             ->on('students')
+            ->onDelete('cascade');
+  
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
             ->onDelete('cascade');
         });
     }

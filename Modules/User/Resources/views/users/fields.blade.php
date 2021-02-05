@@ -18,5 +18,5 @@
 
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
-    <a href="{{ route('user.index') }}" class="btn btn-primary">Cancel</a>
+    <a href="{{ route('user.index') }}" class="btn btn-info">Back</a>
 </div>

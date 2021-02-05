@@ -1,34 +1,50 @@
 <template>
   <div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Selected Books</h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Book Title</th>
+              <th>Book Author</th>
+              <th>ISBN</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="book in books" :key="book.id">
+              <th>{{ book.title }}</th>
+              <td>{{ book.author }}</td>
+              <td>{{ book.isbn }}</td>
+              <td>
+                <button
+                  class="btn btn-sm green"
+                  @click="$emit('select-book', book)"
+                >
+                  <i class="fa fa-plus"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ["books"],
+  emits: ["select-book"],
+};
+</script>
+
+<style  scoped>
+  .table th {
+    border-top: 0px;
+  }
+</style>

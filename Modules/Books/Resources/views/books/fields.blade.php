@@ -46,7 +46,22 @@
     @enderror
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('total_stock', 'Total Stock<span class="required-marker">*</span>', '', false) !!}
+    {!! Form::number('total_stock', null, ['class' => 'form-control', 'required' => 'required']) !!}
+    @error('total_stock')
+        <div class="error text-danger">{{ $message }}</div>
+    @enderror
+</div>
+{{-- <div class="form-group col-sm-6">
+    {!! Form::label('total_available', 'Total Available<span class="required-marker">*</span>', '', false) !!}
+    {!! Form::select('total_available', $genres, null, ['class' => 'form-control']) !!}
+    @error('total_available')
+        <div class="error text-danger">{{ $message }}</div>
+    @enderror
+</div> --}}
+
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
-    <a href="{{ route('students.index') }}" class="btn btn-primary">Cancel</a>
+    <a href="{{ route('books.index') }}" class="btn btn-info">Back</a>
 </div>

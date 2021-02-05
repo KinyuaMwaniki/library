@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Modules\Books\Entities\Book;
+use Modules\Books\Entities\Issuance;
 use Modules\Students\Entities\Student;
 
 class HomeController extends Controller
@@ -27,6 +29,8 @@ class HomeController extends Controller
     {
         $students = Student::all();
         $books = Book::all();
-        return view('home', compact(['students', 'books']));
+        $issuances = Issuance::whereNull('date_returned')->get();
+        $overdue = Issuance::whereNull('date_returned')->where('date_expected', '<', Carbon::today())->get();
+        return view('home', compact(['students', 'books', 'issuances', 'overdue']));
     }
 }

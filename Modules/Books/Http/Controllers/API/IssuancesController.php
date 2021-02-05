@@ -2,9 +2,13 @@
 
 namespace Modules\Books\Http\Controllers\API;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Modules\Books\Entities\Issuance;
+use Illuminate\Support\Facades\Validator;
 
 class IssuancesController extends Controller
 {
@@ -33,7 +37,34 @@ class IssuancesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        info($request->all());
+
+        $rules = [
+            'books' => ['required'],
+            'student' => ['required'],
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+        
+        foreach($request->books as $book) {
+            $issuance = Issuance::create([
+                'book_id' => $book['id'],
+                'student_id' => $request->student['id'],
+                'date_issued' => Carbon::now(),
+                'user_id' => $request->user_id,
+                'date_expected' => Carbon::parse($request->date_expected),
+            ]);
+        }
+
+        return response()->json([
+            'code' => 200,
+            'success' => true,
+            'message' => "Books issued successfully",
+        ]);
     }
 
     /**

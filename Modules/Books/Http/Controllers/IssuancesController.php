@@ -2,11 +2,18 @@
 
 namespace Modules\Books\Http\Controllers;
 
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Books\Entities\Book;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Modules\Books\Entities\Issuance;
+use Modules\Settings\Entities\Setting;
+use Modules\Students\Entities\Student;
+use Illuminate\Support\Facades\Session;
+use Modules\Books\Http\Requests\UpdateIssuanceRequest;
 
 class IssuancesController extends Controller
 {
@@ -16,7 +23,7 @@ class IssuancesController extends Controller
      */
     public function index()
     {
-        $issuances = Issuance::all();
+        $issuances = Issuance::orderBy('date_issued', 'DESC')->paginate(10);
         return view('books::issuances.index', compact('issuances'));
     }
 
@@ -27,7 +34,9 @@ class IssuancesController extends Controller
     public function create()
     {
         $books = Book::all();
-        return view('books::issuances.create', compact('books'));
+        $students = Student::all();
+        $settings = Setting::select('policy', 'value')->get();
+        return view('books::issuances.create', compact(['books', 'students', 'settings']));
     }
 
     /**
@@ -47,7 +56,14 @@ class IssuancesController extends Controller
      */
     public function show($id)
     {
-        return view('books::show');
+        $issuance = Issuance::find($id);
+        
+        if (empty($issuance)) {
+            Session::flash('message', "Issuance Not Found");
+            return redirect(route('issuances.index'));
+        }
+
+        return view('books::issuances.show', compact(['issuance'])); 
     }
 
     /**
@@ -57,7 +73,17 @@ class IssuancesController extends Controller
      */
     public function edit($id)
     {
-        return view('books::edit');
+        $issuance = Issuance::find($id);
+        $books = Book::pluck('title', 'id');
+        $students = Student::get()->pluck('full_name', 'id');
+        $users = User::select('name', 'id')->get();
+        
+        if (empty($issuance)) {
+            Session::flash('message', "Issuance Not Found");
+            return redirect(route('issuances.index'));
+        }
+
+        return view('books::issuances.edit', compact(['issuance', 'books', 'students', 'users'])); 
     }
 
     /**
@@ -66,9 +92,28 @@ class IssuancesController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateIssuanceRequest $request, $id)
     {
-        //
+        info($request->all());
+
+        $issuance = Issuance::find($id);
+        
+        if (empty($issuance)) {
+            Session::flash('message', "Issuance Not Found");
+            return redirect(route('issuances.index'));
+        }
+
+        $issuance->update([
+            'book_id' => $request->book_id,
+            'student_id' => $request->student_id,
+            'date_issued' => $request->date_issued,
+            'date_expected' => $request->date_expected,
+            'date_returned' => $request->date_returned,
+            'received_by_id' => $request->received_by_id,
+        ]);
+
+        Session::flash('message', "Issuance Updated");
+        return redirect(route('issuances.index'));
     }
 
     /**
@@ -79,5 +124,11 @@ class IssuancesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function issuancesOverdue()
+    {
+        $issuances = Issuance::whereNull('date_returned')->where('date_expected', '<', Carbon::today())->get();
+        return view('books::issuances.overdue', compact('issuances'));
     }
 }

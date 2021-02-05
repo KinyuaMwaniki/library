@@ -9,6 +9,7 @@
             <div class="col-md-5 col-sm-5  form-group pull-right">
                 @can('create_students')
                     <a href="{!!  route('students.create') !!}" class="btn btn-info pull-right" type="button">Add New</a>
+                    <a href="{!!  route('students.create_import') !!}" class="btn btn-info pull-right mr-2" type="button">Import</a>
                 @endcan
             </div>
         </div>
@@ -48,13 +49,6 @@
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>Name</th>
-                    <th>Student Number</th>
-                    <th class="text-right">Actions</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 @endsection

@@ -17,16 +17,18 @@ class CreateBooksTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('author');
-            $table->string('isbn')->nullable();
+            $table->string('isbn');
             $table->string('publisher')->nullable();
             $table->unsignedBigInteger('genre_id')->unsigned()->index();
             $table->date('publication_date')->nullable();
+            $table->integer('total_stock');
+            $table->integer('total_available')->nullable();
             $table->timestamps();
 
-            $table->foreign('genre_id')
-            ->references('id')
-            ->on('genres')
-            ->onDelete('cascade');
+            // $table->foreign('genre_id')
+            // ->references('id')
+            // ->on('genres')
+            // ->onDelete('cascade');
         });
     }
 
