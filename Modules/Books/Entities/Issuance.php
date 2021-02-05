@@ -2,6 +2,7 @@
 
 namespace Modules\Books\Entities;
 
+use App\User;
 use Carbon\Carbon;
 use Modules\Books\Entities\Book;
 use Modules\Students\Entities\Student;
@@ -16,12 +17,6 @@ class Issuance extends Model
 
     protected $guarded = [];
 
-    protected $dates = [
-        'date_issued',
-        'date_expected',
-        'date_returned'
-    ];
-
     public function book()
     {
         return $this->belongsTo(Book::class, 'book_id');
@@ -30,6 +25,16 @@ class Issuance extends Model
     public function student()
     {
         return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function receivedBy()
+    {
+        return $this->belongsTo(User::class, 'received_by_id');
     }
 
     public function getStatusAttribute()

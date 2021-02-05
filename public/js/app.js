@@ -2064,7 +2064,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["all_books", "all_students", "all_settings"],
+  props: ["all_books", "all_students", "all_settings", "user"],
   data: function data() {
     return {
       book: "",
@@ -2139,6 +2139,7 @@ __webpack_require__.r(__webpack_exports__);
       var form = {};
       form.books = this.selected_books;
       form.student = this.selected_student;
+      form.user_id = this.user.id;
       form.date_expected = this.date_expected;
       var submit_method = "POST";
       var uri = "/api/v1/issuances";

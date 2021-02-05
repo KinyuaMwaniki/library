@@ -22,20 +22,34 @@
             
             <div class="form-group col-sm-6">
                 <h2>Date Issued</h2>
-                <p>{{ $issuance->date_issued->format('Y m d') }}</p>
+                <p>{{ \Carbon\Carbon::parse($issuance->date_issued)->format('Y m d') }}</p>
             </div>
             
             <div class="form-group col-sm-6">
+              <h2>Issued By</h2>
+              <p>{{ $issuance->user->name }}</p>
+          </div>
+            
+          <div class="form-group col-sm-6">
                 <h2>Date Expected</h2>
-                <p>{{ $issuance->date_expected->format('Y m d') }}</p>
+                <p>{{ \Carbon\Carbon::parse($issuance->date_expected)->format('Y m d') }}</p>
             </div>
+
             
             @if(!is_null($issuance->date_returned))
                 <div class="form-group col-sm-6">
                     <h2>Date Returned</h2>
-                    <p>{{ $issuance->date_returned->format('Y m d')  }}</p>
+                    <p>{{ \Carbon\Carbon::parse($issuance->date_returned)->format('Y m d')  }}</p>
                 </div>
             @endif
+
+            @if(!is_null($issuance->received_by_id))
+                <div class="form-group col-sm-6">
+                    <h2>Received By</h2>
+                    <p>{{ $issuance->receivedBy->name }}</p>
+                </div>
+            @endif
+
             <div class="form-group col-sm-12">
                 <a href="{{ route('issuances.index') }}" class="btn btn-info">Back</a>
             </div>

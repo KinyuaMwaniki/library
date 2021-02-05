@@ -27,7 +27,6 @@
                         <td>{{ $issuance->date_expected->format('Y m d') }}</td>
                         <td>{{ $issuance->date_returned ? $issuance->date_returned->format('Y m d') : '' }}</td>
                         <td class="text-right">
-                            {!! Form::open(['route' => ['issuances.destroy', $issuance->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
                                 @can('read_issuances')
                                 <a class='btn btn-default btn-xs green' href="{{ route('issuances.show', $issuance->id) }}">
@@ -39,15 +38,7 @@
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </a>
                                 @endcan
-                                @can('delete_issuances')
-                                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
-                                'type' => 'submit',
-                                'class' => 'btn btn-danger btn-xs',
-                                'onclick' => "return confirm('Are you sure?')",
-                                ]) !!}
-                                @endcan
                             </div>
-                            {!! Form::close() !!}
                         </td>
                     </tr>
                 @endforeach

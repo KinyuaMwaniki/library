@@ -11,7 +11,8 @@
             <issue-books 
             :all_books="{{ json_encode($books) }} " 
             :all_students="{{ json_encode($students) }}"
-            :all_settings="{{ json_encode($settings) }}">
+            :all_settings="{{ json_encode($settings) }}"
+            :user="{{ json_encode(Auth::user()) }}">
         
             </issue-books>
         </div>

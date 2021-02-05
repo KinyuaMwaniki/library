@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="col-md-12 col-sm-12 ">
-        <table id="data-table" class="display" style="width:100%">
+        <table class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Book</th>
@@ -31,9 +31,9 @@
                     <tr>
                         <td>{{ $issuance->book->title }}</td>
                         <td>{{ $issuance->student->full_name }}</td>
-                        <td>{{ $issuance->date_issued->format('Y m d') }}</td>
-                        <td>{{ $issuance->date_expected->format('Y m d') }}</td>
-                        <td>{{ $issuance->date_returned ? $issuance->date_returned->format('Y m d') : '' }}</td>
+                        <td>{{ \Carbon\Carbon::parse($issuance->date_issued)->format('Y m d') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($issuance->date_expected)->format('Y m d') }}</td>
+                        <td>{{ $issuance->date_returned ? \Carbon\Carbon::parse($issuance->date_returned)->format('Y m d') : '' }}</td>
                         <td>
                             @if($issuance->status === 0)
                                 <i class="fa fa-check green" ></i>
@@ -44,7 +44,6 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            {!! Form::open(['route' => ['issuances.destroy', $issuance->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
                                 @can('read_issuances')
                                 <a class='btn btn-default btn-xs green' href="{{ route('issuances.show', $issuance->id) }}">
@@ -52,46 +51,18 @@
                                 </a>
                                 @endcan
                                 @can('update_issuances') 
-                                <a href="{{ route('issuances.edit', $issuance->id) }}" class='btn btn-default btn-xs'>
+                                <a href="{{ route('issuances.edit', $issuance->id) }}" class='btn btn-default btn-xs blue'>
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </a>
                                 @endcan
-                                @can('delete_issuances')
-                                {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
-                                'type' => 'submit',
-                                'class' => 'btn btn-danger btn-xs',
-                                'onclick' => "return confirm('Are you sure?')",
-                                ]) !!}
-                                @endcan
                             </div>
-                            {!! Form::close() !!}
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-@endsection
-
-@section('scripts')
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#data-table').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5',
-                {
-                    extend: 'colvis',
-                    columns: ':not(.noVis)',
-
-                }
-            ],
-            colReorder: true,
-        });
-    });
-
-</script>
+    <div class="col-md-12 col-sm-12 mt-3 ml-2">
+        {{ $issuances->links() }}
+    </div>
 @endsection

@@ -51,7 +51,7 @@
 
 <script>
 export default {
-  props: ["all_books", "all_students", "all_settings"],
+  props: ["all_books", "all_students", "all_settings", "user"],
   data() {
     return {
       book: "",
@@ -146,6 +146,7 @@ export default {
       let form = {};
       form.books = this.selected_books;
       form.student = this.selected_student;
+      form.user_id = this.user.id;
       form.date_expected = this.date_expected;
 
       let submit_method = "POST";

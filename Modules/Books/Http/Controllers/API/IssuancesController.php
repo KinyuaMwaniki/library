@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Modules\Books\Entities\Issuance;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,6 +37,8 @@ class IssuancesController extends Controller
      */
     public function store(Request $request)
     {
+        info($request->all());
+
         $rules = [
             'books' => ['required'],
             'student' => ['required'],
@@ -52,6 +55,7 @@ class IssuancesController extends Controller
                 'book_id' => $book['id'],
                 'student_id' => $request->student['id'],
                 'date_issued' => Carbon::now(),
+                'user_id' => $request->user_id,
                 'date_expected' => Carbon::parse($request->date_expected),
             ]);
         }

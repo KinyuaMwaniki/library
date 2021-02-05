@@ -17,8 +17,10 @@ $factory->define(Issuance::class, function (Faker $faker) {
     return [
         'book_id' => $faker->numberBetween(1, 100),
         'student_id' => $faker->numberBetween(1, 100),
+        'user_id' => 1,
         'date_issued' => Carbon::parse($date),
         'date_expected' => Carbon::parse($date)->copy()->addDays($default_issue_days),
         'date_returned' => Carbon::parse($date)->copy()->addDays($default_returned_days),
+        'received_by_id' => 1,
     ];
 });
