@@ -2,6 +2,7 @@
 
 namespace Modules\Books\Http\Controllers;
 
+use App\Imports\BooksImport;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Books\Entities\Book;
@@ -141,5 +142,29 @@ class BooksController extends Controller
         $book->delete();
         Session::flash('message', "Book Deleted");
         return redirect(route('books.index'));  
+    }
+
+    public function createImport()
+    {
+        return view('books::books.import');
+    }
+
+    public function import(Request $request) 
+    {
+        if (!$request->hasFile('import')) {
+            Session::flash('error', "Please select a file to upload");
+            return redirect()->back();  
+        }
+
+        $file = $request->file('import');
+        $import = new BooksImport;
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures());
+        }
+
+        Session::flash('message', "Books Imported");
+        return redirect(route('books.index'));
     }
 }

@@ -4,7 +4,9 @@ namespace Modules\Students\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Imports\StudentsImport;
 use Illuminate\Routing\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\Students\Entities\Student;
 use Illuminate\Support\Facades\Session;
 use Modules\Students\Http\Requests\CreateStudentRequest;
@@ -118,5 +120,29 @@ class StudentsController extends Controller
         $student->delete();
         Session::flash('message', "Student Deleted");
         return redirect(route('students.index'));  
+    }
+
+    public function createImport()
+    {
+        return view('students::students.import');
+    }
+
+    public function import(Request $request) 
+    {
+        if (!$request->hasFile('import')) {
+            Session::flash('error', "Please select a file to upload");
+            return redirect()->back();  
+        }
+
+        $file = $request->file('import');
+        $import = new StudentsImport;
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty()) {
+            return back()->withFailures($import->failures());
+        }
+
+        Session::flash('message', "Students Imported");
+        return redirect(route('students.index'));
     }
 }

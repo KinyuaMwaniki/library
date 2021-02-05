@@ -30,7 +30,7 @@
             
             <div class="form-group col-sm-6">
                 <h2>Publication Date</h2>
-                <p>{{ $book->publisher }}</p>
+                <p>{{ $book->publication_date }}</p>
             </div>
             
             <div class="form-group col-sm-6">

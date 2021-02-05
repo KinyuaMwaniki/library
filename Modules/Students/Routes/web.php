@@ -22,4 +22,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/students/{student}/edit', 'StudentsController@edit')->name('students.edit')->permission('update_students');
     Route::patch('/students/{student}', 'StudentsController@update')->name('students.update')->permission('update_students');
     Route::delete('/students/{student}', 'StudentsController@destroy')->name('students.destroy')->permission('delete_students');
+    Route::get('/students-import/create', 'StudentsController@createImport')->name('students.create_import')->permission('create_students');
+    Route::post('/students-import', 'StudentsController@import')->name('students.import')->permission('create_students');
 });

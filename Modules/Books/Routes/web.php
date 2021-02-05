@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/books/{book}/edit', 'BooksController@edit')->name('books.edit')->permission('update_books');
     Route::patch('/books/{book}', 'BooksController@update')->name('books.update')->permission('update_books');
     Route::delete('/books/{book}', 'BooksController@destroy')->name('books.destroy')->permission('delete_books');
+    Route::get('/books-import/create', 'BooksController@createImport')->name('books.create_import')->permission('create_books');
+    Route::post('/books-import', 'BooksController@import')->name('books.import')->permission('create_books');
 });
 
 /**

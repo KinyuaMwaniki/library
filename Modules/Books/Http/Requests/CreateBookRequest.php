@@ -16,7 +16,8 @@ class CreateBookRequest extends FormRequest
         return [
             'title' =>'bail|required|string',
             'author' =>'bail|required|string',
-            'genre_id' =>'bail|required|string',
+            'genre_id' =>'bail|required',
+            'isbn' =>'bail|required|unique:books',
             'total_stock' =>'bail|required',
         ];
     }
