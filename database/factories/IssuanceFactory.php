@@ -8,8 +8,6 @@ use Faker\Generator as Faker;
 use Modules\Books\Entities\Issuance;
 use Modules\Settings\Entities\Setting;
 
-// $random_number
-
 $factory->define(Issuance::class, function (Faker $faker) {
     $default_issue_days = $faker->numberBetween(3, 21);
     $default_returned_days = $faker->numberBetween(5, 30);

@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/books', function (Request $request) {
 
 Route::group(['prefix' => '/v1', 'namespace' => 'API'], function () {
     Route::post('/issuances', 'IssuancesController@store');
+    Route::post('/books', 'BooksController@index');
 });

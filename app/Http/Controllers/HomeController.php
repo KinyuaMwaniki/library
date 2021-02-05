@@ -27,6 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+      
         $students = Student::all();
         $books = Book::all();
         $issuances = Issuance::whereNull('date_returned')->get();
